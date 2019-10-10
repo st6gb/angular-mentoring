@@ -13,6 +13,14 @@ header {
   width: 200px;
 }
 
+.btn {
+  margin: 5px;
+}
+
 .logo {
   color: white;
+}
+
+.img {
+  width: 60px;
 }
