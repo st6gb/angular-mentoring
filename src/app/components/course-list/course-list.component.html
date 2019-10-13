@@ -1,3 +1,4 @@
-<app-course-item></app-course-item>
-<app-course-item></app-course-item>
-<app-course-item></app-course-item>
+<div *ngFor="let course of courseList">
+  <app-course-item [course]="course" (courseDelete) = 'courseDeleteHandler($event)'></app-course-item>
+</div>
+

@@ -1,16 +1,16 @@
 <div class="course-item">
   <div class="header-item">
-    <h1>title</h1>
+    <h1>{{course?.title}}</h1>
     <div>
-      <span>data</span>
-      <span>duration</span>
+      <span>{{course?.creationDate | date:'medium'}}</span>
+      <span>{{course?.duration | date:'medium'}}</span>
     </div>
   </div>
   <div class="content">
-    <div class="description">{{description}}</div>
+    <div class="description">{{course?.description}}</div>
     <div>
       <button class="btn btn-info">Edit</button>
-      <button class="btn btn-info">Delete</button>
+      <button class="btn btn-info" (click)="deleteCourse(course)">Delete</button>
     </div>
   </div>
 </div>

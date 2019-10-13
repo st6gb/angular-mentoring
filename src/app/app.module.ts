@@ -10,6 +10,7 @@ import { SearchComponent } from './components/search/search.component';
 import { CourseListComponent } from './components/course-list/course-list.component';
 import { CourseItemComponent } from './components/course-list/course-item/course-item.component';
 import { CoursesComponent } from './components/pages/courses/courses.component';
+import { AppRoutingModule } from './modules/AppRoutingModule/routes';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { CoursesComponent } from './components/pages/courses/courses.component';
   imports: [
     BrowserModule,
     FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
