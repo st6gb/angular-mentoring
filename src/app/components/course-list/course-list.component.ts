@@ -29,13 +29,15 @@ export class CourseListComponent implements OnInit {
       creationDate: new Date(),
       duration: new Date(),
     }
-  ]
+  ];
+  public courseIdDeleted: string;
   constructor() { }
 
   ngOnInit() {
   }
 
-  public courseDeleteHandler($event) {
-    console.log($event);
+  public courseDeleteHandler(courseIdDeleted) {
+    console.log(courseIdDeleted);
+    this.courseIdDeleted = courseIdDeleted;
   }
 }
