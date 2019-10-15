@@ -1,10 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesComponent } from './courses.component';
-import { CourseListComponent } from '../../course-list/course-list.component';
-import { CourseItemComponent } from '../../course-list/course-item/course-item.component';
-import { SearchComponent } from '../../search/search.component';
 import { FormsModule } from '@angular/forms';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('CoursesComponent', () => {
   let component: CoursesComponent;
@@ -12,8 +10,9 @@ describe('CoursesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CoursesComponent, CourseListComponent, CourseItemComponent, SearchComponent ],
-      imports: [FormsModule]
+      declarations: [ CoursesComponent ],
+      imports: [FormsModule],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     })
     .compileComponents();
   }));
