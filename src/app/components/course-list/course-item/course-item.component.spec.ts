@@ -2,32 +2,48 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseItemComponent } from './course-item.component';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
 import { Course } from 'src/app/models/common-module';
+import { Component } from '@angular/core';
 
-describe('CourseItemComponent', () => {
-  let component: CourseItemComponent;
-  let fixture: ComponentFixture<CourseItemComponent>;
-  const course: Course = {
-    id: "1",
-    title: "title",
-    description: "description",
+@Component({
+  template: `
+  <app-course-item [course]="course" (courseDelete) = 'courseDeleteHandler($event)'></app-course-item>
+  `
+})
+class TestHostComponent {
+  public course: Course = {
+    id: '1',
+    title: 'title',
+    description: 'description',
     duration: new Date(),
     creationDate: new Date(),
   };
+  deletedCourse: string;
+
+  constructor() { }
+
+  public courseDeleteHandler(deletedCourse: string): void {
+    this.deletedCourse = deletedCourse;
+  }
+
+}
+
+
+describe('CourseItemComponent', () => {
+  let component: TestHostComponent;
+  let fixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CourseItemComponent ],
-      imports: [FormsModule, BrowserModule]
+      declarations: [ CourseItemComponent, TestHostComponent ],
+      imports: [FormsModule]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CourseItemComponent);
+    fixture = TestBed.createComponent(TestHostComponent);
     component = fixture.componentInstance;
-    component.course = course;
     fixture.detectChanges();
   });
 
@@ -37,6 +53,13 @@ describe('CourseItemComponent', () => {
 
   it('should has title', () => {
     const title = fixture.debugElement.nativeElement.querySelector('h1');
-    expect(title.innerText).toBe('title');
-  })
+    expect(title.textContent).toBe('title');
+  });
+
+  it('after click should has deleteCoursesId', () => {
+    const button: HTMLElement = fixture.debugElement.nativeElement.querySelectorAll('button')[1];
+    expect(button.textContent).toBe('Delete');
+    button.click();
+    expect(component.deletedCourse).toBe('1');
+  });
 });
