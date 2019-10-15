@@ -5,11 +5,11 @@ import { CoursesComponent } from 'src/app/components/pages/courses/courses.compo
 const routes: Routes = [
   {path: '', redirectTo: '/courses', pathMatch: 'full'},
   {path: 'courses', component: CoursesComponent },
-  ];
-   
-   @NgModule({
+];
+
+  @NgModule({
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule]
-   })
-   
-   export class AppRoutingModule{}
+  })
+  
+  export class AppRoutingModule{}

@@ -11,6 +11,7 @@ import { CourseListComponent } from './components/course-list/course-list.compon
 import { CourseItemComponent } from './components/course-list/course-item/course-item.component';
 import { CoursesComponent } from './components/pages/courses/courses.component';
 import { AppRoutingModule } from './modules/AppRoutingModule/routes';
+import { CustomBorderDirective } from './directives/custom-border.directive';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { AppRoutingModule } from './modules/AppRoutingModule/routes';
     CourseListComponent,
     CourseItemComponent,
     CoursesComponent,
+    CustomBorderDirective,
   ],
   imports: [
     BrowserModule,
