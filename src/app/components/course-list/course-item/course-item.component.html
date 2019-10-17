@@ -1,6 +1,6 @@
-<div class="course-item" [appCustomBorder] = "'dadsad'">
+<div class="course-item" [appCustomBorder] = "course.creationDate" [ngClass]="{'course-item--topRated': course.topRated}">
   <div class="header-item">
-    <h1>{{course.title}}</h1>
+    <h1>{{course.title | titlecase }}<span class="star" *ngIf="course.topRated">★</span></h1>
     <div>
       <span>{{course.creationDate | date:'medium'}}</span>
       <span>{{course.duration | date:'medium'}}</span>

@@ -18,6 +18,7 @@ export class Course implements ICourse {
   creationDate: Date;
   duration: Date;
   description: string;
+  topRated: boolean;
 
   constructor(data: Partial<Course>) {
     Object.assign(this, data);
