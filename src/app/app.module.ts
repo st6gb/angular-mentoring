@@ -12,6 +12,9 @@ import { CourseItemComponent } from './components/course-list/course-item/course
 import { CoursesComponent } from './components/pages/courses/courses.component';
 import { AppRoutingModule } from './modules/AppRoutingModule/routes';
 import { CustomBorderDirective } from './directives/custom-border.directive';
+import { DateFormatPipe } from './pipes/dateFormate/date-format.pipe';
+import { OrderByPipe } from './pipes/orderBy/order-by.pipe';
+import { FilterCoursePipe } from './pipes/filterCourse/filter-course.pipe';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,9 @@ import { CustomBorderDirective } from './directives/custom-border.directive';
     CourseItemComponent,
     CoursesComponent,
     CustomBorderDirective,
+    DateFormatPipe,
+    OrderByPipe,
+    FilterCoursePipe,
   ],
   imports: [
     BrowserModule,

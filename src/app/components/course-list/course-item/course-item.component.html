@@ -2,8 +2,8 @@
   <div class="header-item">
     <h1>{{course.title | titlecase }}<span class="star" *ngIf="course.topRated">★</span></h1>
     <div>
-      <span>{{course.creationDate | date:'medium'}}</span>
-      <span>{{course.duration | date:'medium'}}</span>
+      <span>{{course.creationDate | date:'medium'}}</span><br />
+      <span>{{course.duration | dateFormat}}</span>
     </div>
   </div>
   <div class="content">

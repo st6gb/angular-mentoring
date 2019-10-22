@@ -1,5 +1,5 @@
-<div *ngFor="let course of courseList">
+<div *ngFor="let course of courseList | orderBy">
   <app-course-item [course]="course" (courseDelete) = 'courseDeleteHandler($event)'></app-course-item>
-  <div *ngIf="courseList.length === 0">No data yet</div>
 </div>
+<div *ngIf="courseList.length === 0">No data yet</div>
 
