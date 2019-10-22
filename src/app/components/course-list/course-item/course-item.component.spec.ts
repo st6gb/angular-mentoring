@@ -17,6 +17,7 @@ class TestHostComponent {
     description: 'description',
     duration: new Date(),
     creationDate: new Date(),
+    topRated: true,
   };
   deletedCourse: string;
 
