@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CourseItemComponent } from './course-item.component';
 import { FormsModule } from '@angular/forms';
 import { Course } from 'src/app/models/common-module';
-import { Component } from '@angular/core';
+import { Component, Pipe, PipeTransform, Directive, Input } from '@angular/core';
 
 @Component({
   template: `
@@ -28,16 +28,30 @@ class TestHostComponent {
   }
 
 }
+@Pipe({ name: 'dateFormat' })
+class DateFormatStub implements PipeTransform {
+  transform(value) {
+    return value;
+  }
+}
 
+@Directive({
+  selector: '[appCustomBorder]'
+})
+export class StubCustomBorderDirective {
+  @Input('appCustomBorder') createdDate: Date;
 
-describe('CourseItemComponent', () => {
+  constructor() {}
+}
+
+fdescribe('CourseItemComponent', () => {
   let component: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CourseItemComponent, TestHostComponent ],
-      imports: [FormsModule]
+      declarations: [ CourseItemComponent, TestHostComponent, StubCustomBorderDirective, DateFormatStub ],
+      imports: [FormsModule],
     })
     .compileComponents();
   }));
