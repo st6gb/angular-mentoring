@@ -17,7 +17,7 @@ class TestHostComponent {
     description: 'description',
     duration: new Date(),
     creationDate: new Date(),
-    topRated: true,
+    topRated: false,
   };
   deletedCourse: string;
 
@@ -44,7 +44,7 @@ export class StubCustomBorderDirective {
   constructor() {}
 }
 
-fdescribe('CourseItemComponent', () => {
+describe('CourseItemComponent', () => {
   let component: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
 
@@ -68,7 +68,7 @@ fdescribe('CourseItemComponent', () => {
 
   it('should has title', () => {
     const title = fixture.debugElement.nativeElement.querySelector('h1');
-    expect(title.textContent).toBe('title');
+    expect(title.textContent).toBe('Title');
   });
 
   it('after click should has deleteCoursesId', () => {
