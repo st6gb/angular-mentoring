@@ -8,13 +8,13 @@ import { Course } from 'src/app/models/common-module';
 })
 export class CourseItemComponent implements OnInit {
   @Input() course: Course;
-  @Output() courseDelete: EventEmitter<string> = new EventEmitter<string>();
+  @Output() courseDelete: EventEmitter<Course> = new EventEmitter<Course>();
   constructor() { }
 
   ngOnInit() {
   }
 
   deleteCourse(course: Course): void {
-    this.courseDelete.emit(course.id);
+    this.courseDelete.emit(course);
   }
 }

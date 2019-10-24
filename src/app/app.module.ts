@@ -15,6 +15,7 @@ import { CustomBorderDirective } from './directives/custom-border.directive';
 import { DateFormatPipe } from './pipes/dateFormate/date-format.pipe';
 import { OrderByPipe } from './pipes/orderBy/order-by.pipe';
 import { FilterCoursePipe } from './pipes/filterCourse/filter-course.pipe';
+import { CourseServiceService } from './services/courseService/course-service.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { FilterCoursePipe } from './pipes/filterCourse/filter-course.pipe';
     FormsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [CourseServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
