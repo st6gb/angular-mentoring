@@ -57,13 +57,13 @@ export class CourseServiceService {
     return of(this.mockCourseList).pipe(
       delay(500),
       switchMap((courseList: Course[]) => {
-        if(courseList.find((item: Course) => item.id === course.id)) {
+        if (courseList.find((item: Course) => item.id === course.id)) {
           return of({});
         }
-        this.mockCourseList = [...this.mockCourseList, course]
+        this.mockCourseList = [...this.mockCourseList, course];
         return of(course);
       })
-    )
+    );
   }
 
   public updateCourse(course: Course): Observable<Course | {}> {
@@ -71,13 +71,13 @@ export class CourseServiceService {
       delay(500),
       switchMap((courseList: Course[]) => {
         const courseFound = courseList.find((item: Course) => item.id === course.id);
-        if(courseFound) {
+        if (courseFound) {
           this.mockCourseList = this.mockCourseList.map((item: Course) => item.id === course.id ? course : item);
           return of(course);
         }
-        return of({})
+        return of({});
       })
-    )
+    );
   }
 
   public removeCourse(id: string): Observable<Course | {}> {

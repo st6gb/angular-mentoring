@@ -16,6 +16,8 @@ import { DateFormatPipe } from './pipes/dateFormate/date-format.pipe';
 import { OrderByPipe } from './pipes/orderBy/order-by.pipe';
 import { FilterCoursePipe } from './pipes/filterCourse/filter-course.pipe';
 import { CourseServiceService } from './services/courseService/course-service.service';
+import { LoginService } from './services/login/login.service';
+import { LocalStorageService } from './services/localStorage/local-storage.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,7 @@ import { CourseServiceService } from './services/courseService/course-service.se
     FormsModule,
     AppRoutingModule
   ],
-  providers: [CourseServiceService],
+  providers: [CourseServiceService, LoginService, LocalStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
