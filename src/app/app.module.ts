@@ -18,6 +18,7 @@ import { FilterCoursePipe } from './pipes/filterCourse/filter-course.pipe';
 import { CourseServiceService } from './services/courseService/course-service.service';
 import { LoginService } from './services/login/login.service';
 import { LocalStorageService } from './services/localStorage/local-storage.service';
+import { LoginComponent } from './components/pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { LocalStorageService } from './services/localStorage/local-storage.servi
     DateFormatPipe,
     OrderByPipe,
     FilterCoursePipe,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
