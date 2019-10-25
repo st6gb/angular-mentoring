@@ -56,7 +56,7 @@ export class CourseServiceService {
   public createCourse(course: Course): Observable<Course | {}> {
     return of(this.mockCourseList).pipe(
       delay(500),
-      switchMap((courseList:Course[]) => {
+      switchMap((courseList: Course[]) => {
         if(courseList.find((item: Course) => item.id === course.id)) {
           return of({});
         }
@@ -85,12 +85,12 @@ export class CourseServiceService {
       delay(500),
       switchMap((courseList: Course[]) => {
         const courseFound = courseList.find((item: Course) => item.id === id);
-        if(courseFound) {
+        if (courseFound) {
           this.mockCourseList = this.mockCourseList.filter(course => course.id !== id);
           return of(courseFound);
         }
-        return of({})
+        return of({});
       })
-    )
+    );
   }
 }

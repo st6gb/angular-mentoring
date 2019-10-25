@@ -8,8 +8,10 @@ interface ICourse {
 
 interface IUser {
   id: string;
-  firstName: string;
-  LastName: string;
+  firstName?: string;
+  LastName?: string;
+  password?: string;
+  email: string;
 }
 
 export class Course implements ICourse {
@@ -29,6 +31,8 @@ export class User implements IUser {
   readonly id: string;
   firstName: string;
   LastName: string;
+  password?: string;
+  email: string;
 
   constructor(data: Partial<User>) {
     Object.assign(this, data);

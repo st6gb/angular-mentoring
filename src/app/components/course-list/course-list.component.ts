@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Course } from 'src/app/models/common-module';
 import { CourseServiceService } from 'src/app/services/courseService/course-service.service';
+import { isCourse } from 'src/app/models/union-types';
 
 @Component({
   selector: 'app-course-list',
@@ -18,16 +19,16 @@ export class CourseListComponent implements OnInit {
   }
 
   public courseDeleteHandler(courseDeleted: Course) {
-    if(confirm(`Are you sure to delete ${courseDeleted.title}`)) {
+    if (confirm(`Are you sure to delete ${courseDeleted.title}`)) {
       this.courseService.removeCourse(courseDeleted.id).subscribe(data => {
-        if(data instanceof Course) { // don't work need union type!!!
+        if (isCourse(data)) {
           alert('Deleted success');
           this.courseList = this.courseList.filter(course => course.id !== data.id);
           return;
         }
         alert('Something went wrong');
         return;
-      })
+      });
     }
   }
 }
