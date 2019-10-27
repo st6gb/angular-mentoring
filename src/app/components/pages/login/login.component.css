@@ -1,0 +1,31 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.login {
+  width: 400px;
+  height: 350px;
+  background: white;
+  box-sizing: border-box;
+  padding: 20px 15px;
+  border-radius: 5px;
+}
+
+.field {
+  margin-bottom: 10px;
+}
+
+.buttons-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 90px;
+}
+
+.buttons-group button{
+  height: 38px;
+}

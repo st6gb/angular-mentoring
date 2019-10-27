@@ -31,7 +31,8 @@ export class LoginService {
     );
   }
 
-  public isAuthenticated(token: string): Observable<boolean> {
+  public isAuthenticated(): Observable<boolean> {
+    const token = this.localStorage.getItem('token');
     const serverToken = this.localStorage.getItem('token');
     return of(token === serverToken).pipe(
       delay(500)
@@ -39,7 +40,7 @@ export class LoginService {
   }
 
   public getUserInfo(token: string): Observable<User | null> {
-    return this.isAuthenticated(token).pipe(
+    return this.isAuthenticated().pipe(
       switchMap(isAuth => {
         return isAuth ? of(JSON.parse(this.localStorage.getItem('user'))) : of(null);
       })
