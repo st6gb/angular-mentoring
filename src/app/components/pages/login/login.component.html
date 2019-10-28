@@ -2,11 +2,21 @@
   <h1>Login</h1>
   <div class="field">
     <label>E-mail</label>
-    <input type="email" placeholder=" Enter your e-mail" class="form-control"/>
+    <input
+      [(ngModel)]="email"
+      type="email"
+      placeholder=" Enter your e-mail"
+      class="form-control"
+    />
   </div>
   <div class="field">
     <label>Password</label>
-    <input type="password" placeholder="Enter your password" class="form-control" />
+    <input
+      [(ngModel)]="password"
+      type="password"
+      placeholder="Enter your password"
+      class="form-control"
+    />
   </div>
   <div class="buttons-group">
     <a href="#">Forget your password?</a>
