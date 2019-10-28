@@ -19,6 +19,8 @@ import { CourseServiceService } from './services/courseService/course-service.se
 import { LoginService } from './services/login/login.service';
 import { LocalStorageService } from './services/localStorage/local-storage.service';
 import { LoginComponent } from './components/pages/login/login.component';
+import { CourseDetailsComponent } from './components/pages/course-details/course-details.component';
+import { PageNotFoundComponent } from './components/pages/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { LoginComponent } from './components/pages/login/login.component';
     OrderByPipe,
     FilterCoursePipe,
     LoginComponent,
+    CourseDetailsComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

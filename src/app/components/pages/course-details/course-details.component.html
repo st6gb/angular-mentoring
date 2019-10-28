@@ -1,0 +1,26 @@
+<div class="details-course">
+  <div>
+    <label>Title</label>
+    <input class="form-control" [(ngModel)]="title">
+  </div>
+  <div>
+    <label>Description</label>
+    <textarea class="form-control" [(ngModel)]="description"></textarea>
+  </div>
+  <div class="date">
+    <label>Date</label>
+    <input class="form-control" [(ngModel)]="date">
+  </div>
+  <div class="date">
+    <label >Duration</label>
+    <input class="form-control" [(ngModel)]="duration">
+  </div>
+  <div>
+    <label>Authors</label>
+    <input class="form-control">
+  </div>
+  <div class="button-group">
+    <button class="btn btn-primary" (click)="onSave()">Save</button>
+    <button class="btn btn-light" (click)="onCancel()">Cancel</button>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+:host {
+  display: flex;
+  justify-content: center;
+}
+
+.details-course {
+  width: 80%;
+}
+
+.button-group {
+  display: flex;
+  margin-top: 20px;
+  width: 150px;
+  justify-content: space-between;
+}
+
+.form-control {
+  margin-bottom: 10px;
+}
+
+.date {
+  width: 15%;
+}
