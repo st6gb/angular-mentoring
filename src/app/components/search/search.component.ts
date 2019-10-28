@@ -8,7 +8,6 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class SearchComponent implements OnInit {
   @Output() filteredCourses: EventEmitter<string> = new EventEmitter<string>();
   public searchValue = '';
-  public name = '';
   constructor() { }
 
   ngOnInit() {
