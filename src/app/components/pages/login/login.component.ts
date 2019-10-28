@@ -8,22 +8,8 @@ import { User } from 'src/app/models/common-module';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  private _email: string;
-  get email(): string {
-    return this._email;
-  }
-  set email(value: string) {
-    this._email = value;
-  }
-
-  private _password: string;
-  get password(): string {
-    return this._password;
-  }
-
-  set password(value: string) {
-    this._password = value;
-  }
+  public email: string = '';
+  public password: string = '';
 
   constructor(private loginService: LoginService) { }
 
@@ -38,7 +24,9 @@ export class LoginComponent implements OnInit {
       password: this.password,
       email: this.email,
     };
-    this.loginService.login(new User(newUser));
+    this.loginService.login(new User(newUser)).subscribe(data => {
+      console.log(data, 'you log in our service!')
+    });
   }
 
 }
