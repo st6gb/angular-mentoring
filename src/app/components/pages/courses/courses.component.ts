@@ -27,7 +27,7 @@ export class CoursesComponent implements OnInit {
     this.courseList = this.filterCourses.transform(this.courseList, value);
   }
 
-  public addNewCourse(){
+  public addNewCourse() {
     this.router.navigate(['courses/details']);
   }
 }

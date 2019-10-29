@@ -5,12 +5,19 @@
 
 .details-course {
   width: 80%;
+  padding: 50px;
+  background-color: #757d8a;
+  border-radius: 5px;
+}
+
+.details-course label{
+  color: white;
 }
 
 .button-group {
   display: flex;
   margin-top: 20px;
-  width: 150px;
+  width: 230px;
   justify-content: space-between;
 }
 
