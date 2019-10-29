@@ -21,6 +21,7 @@ import { LocalStorageService } from './services/localStorage/local-storage.servi
 import { LoginComponent } from './components/pages/login/login.component';
 import { CourseDetailsComponent } from './components/pages/course-details/course-details.component';
 import { PageNotFoundComponent } from './components/pages/page-not-found/page-not-found.component';
+import { ModalBoxComponent } from './components/modal-box/modal-box.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { PageNotFoundComponent } from './components/pages/page-not-found/page-no
     LoginComponent,
     CourseDetailsComponent,
     PageNotFoundComponent,
+    ModalBoxComponent,
   ],
   imports: [
     BrowserModule,
