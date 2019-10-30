@@ -22,6 +22,7 @@ import { LoginComponent } from './components/pages/login/login.component';
 import { CourseDetailsComponent } from './components/pages/course-details/course-details.component';
 import { PageNotFoundComponent } from './components/pages/page-not-found/page-not-found.component';
 import { ModalBoxComponent } from './components/modal-box/modal-box.component';
+import { AuthGuard } from './guards/AuthGuard/auth.guard';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,7 @@ import { ModalBoxComponent } from './components/modal-box/modal-box.component';
     FormsModule,
     AppRoutingModule
   ],
-  providers: [CourseServiceService, LoginService, LocalStorageService],
+  providers: [CourseServiceService, LoginService, LocalStorageService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

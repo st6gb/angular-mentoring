@@ -34,12 +34,12 @@ export class LoginService {
   public isAuthenticated(): Observable<boolean> {
     const token = this.localStorage.getItem('token');
     const serverToken = this.localStorage.getItem('token');
-    return of(token === serverToken).pipe(
+    return of(token === serverToken && token !== null).pipe(
       delay(500)
     );
   }
 
-  public getUserInfo(token: string): Observable<User | null> {
+  public getUserInfo(token?: string): Observable<User | null> {
     return this.isAuthenticated().pipe(
       switchMap(isAuth => {
         return isAuth ? of(JSON.parse(this.localStorage.getItem('user'))) : of(null);
