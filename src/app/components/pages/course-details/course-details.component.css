@@ -1,0 +1,30 @@
+:host {
+  display: flex;
+  justify-content: center;
+}
+
+.details-course {
+  width: 80%;
+  padding: 50px;
+  background-color: #757d8a;
+  border-radius: 5px;
+}
+
+.details-course label{
+  color: white;
+}
+
+.button-group {
+  display: flex;
+  margin-top: 20px;
+  width: 230px;
+  justify-content: space-between;
+}
+
+.form-control {
+  margin-bottom: 10px;
+}
+
+.date {
+  width: 15%;
+}

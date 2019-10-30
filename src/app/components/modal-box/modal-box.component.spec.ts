@@ -1,22 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoginComponent } from './login.component';
-import { FormsModule } from '@angular/forms';
+import { ModalBoxComponent } from './modal-box.component';
 
-describe('LoginComponent', () => {
-  let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
+describe('ModalBoxComponent', () => {
+  let component: ModalBoxComponent;
+  let fixture: ComponentFixture<ModalBoxComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [LoginComponent],
-      imports: [FormsModule],
+      declarations: [ ModalBoxComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoginComponent);
+    fixture = TestBed.createComponent(ModalBoxComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
       email: this.email,
     };
     this.loginService.login(new User(newUser)).subscribe(data => {
-      console.log(data, 'you log in our service!')
+      console.log(data, 'you log in our service!');
     });
   }
 

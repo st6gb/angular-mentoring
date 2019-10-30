@@ -19,11 +19,11 @@ class TestHostComponent {
     creationDate: new Date(),
     topRated: false,
   };
-  deletedCourse: string;
+  deletedCourse: Course;
 
   constructor() { }
 
-  public courseDeleteHandler(deletedCourse: string): void {
+  public courseDeleteHandler(deletedCourse: Course): void {
     this.deletedCourse = deletedCourse;
   }
 
@@ -75,6 +75,6 @@ describe('CourseItemComponent', () => {
     const button: HTMLElement = fixture.debugElement.nativeElement.querySelectorAll('button')[1];
     expect(button.textContent).toBe('Delete');
     button.click();
-    expect(component.deletedCourse).toBe('1');
+    expect(component.deletedCourse).toEqual(component.course);
   });
 });
