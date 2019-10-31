@@ -3,6 +3,7 @@ import { Course } from 'src/app/models/common-module';
 import { FilterCoursePipe } from 'src/app/pipes/filterCourse/filter-course.pipe';
 import { CourseServiceService } from 'src/app/services/courseService/course-service.service';
 import { Router } from '@angular/router';
+import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 @Component({
   selector: 'app-courses',
   templateUrl: './courses.component.html',
@@ -10,17 +11,22 @@ import { Router } from '@angular/router';
   providers: [FilterCoursePipe]
 })
 export class CoursesComponent implements OnInit {
-  public courseList: Course[] = [];
+  public courseList: Course[];
 
   constructor(
     private filterCourses: FilterCoursePipe,
     private courseService: CourseServiceService,
-    private router: Router
+    private router: Router,
+    private spinnerService: SpinnerService
     ) {
   }
 
   ngOnInit() {
-    this.courseService.getCourseList().subscribe(data => this.courseList = data);
+    this.spinnerService.show();
+    this.courseService.getCourseList().subscribe(data => {
+      this.courseList = data;
+      this.spinnerService.hide();
+    });
   }
 
   public filteredCourses(value = '') {
@@ -28,6 +34,6 @@ export class CoursesComponent implements OnInit {
   }
 
   public addNewCourse() {
-    this.router.navigate(['courses/details']);
+    this.router.navigate(['courses/details/new']);
   }
 }

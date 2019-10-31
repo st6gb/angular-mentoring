@@ -15,7 +15,7 @@ export class LoginService {
 
   public login(user: User): Observable<string> {
     return of(user).pipe(
-      delay(500),
+      delay(100),
       switchMap(value => {
         this.localStorage.setItem('user', value);
         this.localStorage.setItem('token', 'token');
@@ -27,7 +27,7 @@ export class LoginService {
   public logout(): Observable<boolean> {
     this.localStorage.removeItem('token');
     return of(this.localStorage.removeItem('user')).pipe(
-      delay(500)
+      delay(200)
     );
   }
 
@@ -35,7 +35,7 @@ export class LoginService {
     const token = this.localStorage.getItem('token');
     const serverToken = this.localStorage.getItem('token');
     return of(token === serverToken && token !== null).pipe(
-      delay(500)
+      delay(200)
     );
   }
 

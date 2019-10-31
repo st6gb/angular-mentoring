@@ -7,7 +7,7 @@ import { compareAsc } from 'date-fns';
 })
 export class OrderByPipe implements PipeTransform {
 
-  transform(courses: Course[], ...args: any[]): Course[] {
+  transform(courses: Course[] = [], ...args: any[]): Course[] {
     return courses.sort((a, b) => {
       return compareAsc(a.creationDate, b.creationDate);
     });

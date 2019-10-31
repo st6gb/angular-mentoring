@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-course-details',
@@ -11,7 +12,9 @@ export class CourseDetailsComponent implements OnInit {
   public date: string = '';
   public duration: string = '';
 
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit() {
   }
@@ -21,6 +24,6 @@ export class CourseDetailsComponent implements OnInit {
   }
 
   public onCancel() {
-    console.log('cancel it!!!');
+    this.router.navigate(['courses']);
   }
 }

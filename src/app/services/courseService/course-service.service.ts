@@ -39,13 +39,13 @@ export class CourseServiceService {
 
   public getCourseList(): Observable<Course[]> {
     return of(this.mockCourseList).pipe(
-      delay(500)
+      delay(200)
     );
   }
 
   public getCourseById(id: string): Observable<Course | {}> {
     return of(this.mockCourseList).pipe(
-      delay(500),
+      delay(200),
       switchMap((courseList: Course[]) => {
         const courseFound = courseList.find(course => course.id === id);
         return courseFound ? of(courseFound) : of({});

@@ -23,6 +23,8 @@ import { CourseDetailsComponent } from './components/pages/course-details/course
 import { PageNotFoundComponent } from './components/pages/page-not-found/page-not-found.component';
 import { ModalBoxComponent } from './components/modal-box/modal-box.component';
 import { AuthGuard } from './guards/AuthGuard/auth.guard';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { SpinnerService } from './services/spinner/spinner.service';
 
 @NgModule({
   declarations: [
@@ -42,13 +44,14 @@ import { AuthGuard } from './guards/AuthGuard/auth.guard';
     CourseDetailsComponent,
     PageNotFoundComponent,
     ModalBoxComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule
   ],
-  providers: [CourseServiceService, LoginService, LocalStorageService, AuthGuard],
+  providers: [CourseServiceService, LoginService, LocalStorageService, AuthGuard, SpinnerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -24,6 +24,9 @@
   </div>
   <div class="buttons-group">
     <a href="#">Forget your password?</a>
-    <button class="btn btn-success" (click)="onSubmit()">Login</button>
+    <button class="btn btn-success" (click)="onSubmit()" [disabled]="isLoading">
+        <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      Login
+    </button>
   </div>
 </div>
