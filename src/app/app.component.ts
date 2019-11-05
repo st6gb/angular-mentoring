@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoginService } from './services/login/login.service';
 
 @Component({
@@ -6,6 +6,11 @@ import { LoginService } from './services/login/login.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  constructor(public loginService: LoginService) {}
+export class AppComponent implements OnInit {
+  constructor(public loginService: LoginService) {
+  }
+
+  ngOnInit() {
+    this.loginService.isAuthenticated().subscribe((data) => console.log(data, 'this is login'));
+  }
 }

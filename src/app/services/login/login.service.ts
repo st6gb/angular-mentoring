@@ -27,7 +27,7 @@ export class LoginService {
   public logout(): Observable<boolean> {
     this.localStorage.removeItem('token');
     return of(this.localStorage.removeItem('user')).pipe(
-      delay(200)
+      delay(100)
     );
   }
 
@@ -35,7 +35,7 @@ export class LoginService {
     const token = this.localStorage.getItem('token');
     const serverToken = this.localStorage.getItem('token');
     return of(token === serverToken && token !== null).pipe(
-      delay(200)
+      delay(100)
     );
   }
 
