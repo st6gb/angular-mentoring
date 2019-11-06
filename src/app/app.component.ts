@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './services/login/login.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loginService.isAuthenticated().subscribe((data) => console.log(data, 'this is login'));
+    this.loginService.setAuthenticated().subscribe((data) => console.log(data, 'this is login'));
   }
 }

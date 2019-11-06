@@ -8,10 +8,10 @@ import { AuthGuard } from 'src/app/guards/AuthGuard/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/courses', pathMatch: 'full' },
-  { path: 'courses', canActivate: [AuthGuard], children: [
+  { path: 'courses', canActivate: [AuthGuard], data: { breadcrumb: 'Courses' }, children: [
     { path: '', component: CoursesComponent, },
-    { path: 'details/:id', component: CourseDetailsComponent },
-    { path: 'details/new', component: CourseDetailsComponent },
+    { path: 'details/:id', component: CourseDetailsComponent, data: { breadcrumb: '' } },
+    { path: 'details/new', component: CourseDetailsComponent, data: { breadcrumb: 'new' } },
   ] },
   { path: 'login', component: LoginComponent },
   { path: '**', component: PageNotFoundComponent, }

@@ -1,5 +1,5 @@
 <app-header></app-header>
-<div *ngIf="loginService.isAuthenticated() | async">
+<div *ngIf="loginService.isAuth | async">
   <app-breadcrumbs ></app-breadcrumbs>
 </div>
 

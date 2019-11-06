@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/internal/operators';
+import { Router, ActivatedRoute, NavigationEnd, ChildActivationEnd } from '@angular/router';
+import { filter, tap, map, take } from 'rxjs/internal/operators';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -15,10 +15,13 @@ export class BreadcrumbsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('here');
-    this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe((data) => console.log(data, this.activatedRoute.root));
+    this.router.events.pipe(
+      filter(event => event instanceof ChildActivationEnd),
+    ).subscribe(console.log)
+    // this.activatedRoute.queryParamMap.subscribe(console.log);
+  //   this.router.events
+  //     .pipe(filter(event => event instanceof NavigationEnd))
+  //     .subscribe((data) => console.log(data));
   }
 
 }
