@@ -25,6 +25,7 @@ import { ModalBoxComponent } from './components/modal-box/modal-box.component';
 import { AuthGuard } from './guards/AuthGuard/auth.guard';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SpinnerService } from './services/spinner/spinner.service';
+import { CoursesModule } from './modules/courses/courses.module';
 
 @NgModule({
   declarations: [
@@ -33,25 +34,19 @@ import { SpinnerService } from './services/spinner/spinner.service';
     HeaderComponent,
     BreadcrumbsComponent,
     SearchComponent,
-    CourseListComponent,
-    CourseItemComponent,
-    CoursesComponent,
-    CustomBorderDirective,
-    DateFormatPipe,
-    OrderByPipe,
     FilterCoursePipe,
     LoginComponent,
-    CourseDetailsComponent,
     PageNotFoundComponent,
     ModalBoxComponent,
     SpinnerComponent,
   ],
+  exports: [SpinnerComponent],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule
   ],
-  providers: [CourseServiceService, LoginService, LocalStorageService, AuthGuard, SpinnerService],
+  providers: [LoginService, LocalStorageService, AuthGuard, SpinnerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
