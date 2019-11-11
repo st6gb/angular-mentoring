@@ -26,27 +26,24 @@ import { AuthGuard } from './guards/AuthGuard/auth.guard';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SpinnerService } from './services/spinner/spinner.service';
 import { CoursesModule } from './modules/courses/courses.module';
+import { LoginModule } from './modules/login/login.module';
+import { CoreModule } from './modules/core/core.module';
+import { ShareModule } from './modules/share/share.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent,
-    HeaderComponent,
-    BreadcrumbsComponent,
-    SearchComponent,
-    FilterCoursePipe,
-    LoginComponent,
     PageNotFoundComponent,
-    ModalBoxComponent,
-    SpinnerComponent,
   ],
-  exports: [SpinnerComponent],
+  exports: [],
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CoreModule.forRoot(),
+    ShareModule
   ],
-  providers: [LoginService, LocalStorageService, AuthGuard, SpinnerService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

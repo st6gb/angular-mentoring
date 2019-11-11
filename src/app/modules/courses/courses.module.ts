@@ -12,6 +12,8 @@ import { DateFormatPipe } from 'src/app/pipes/dateFormate/date-format.pipe';
 import { OrderByPipe } from 'src/app/pipes/orderBy/order-by.pipe';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
+import { ShareModule } from '../share/share.module';
+import { CoreModule } from '../core/core.module';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
   ],
   imports: [
     CommonModule,
-    CoursesRoutingModule
+    CoursesRoutingModule,
+    ShareModule,
+    CoreModule
   ],
   providers: [CourseServiceService]
 })

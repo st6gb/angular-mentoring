@@ -7,7 +7,7 @@ import { CourseDetailsComponent } from 'src/app/components/pages/course-details/
 
 const routerCourses: Routes = [
   {
-    path: '', canActivate: [AuthGuard], component: CoursesComponent,
+    path: '', canActivate: [AuthGuard],
     data: { breadcrumb: 'Courses' },
     children: [
       { path: '', component: CoursesComponent, data: { breadcrumb: null } },
