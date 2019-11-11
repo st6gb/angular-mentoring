@@ -1,58 +1,69 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd, ChildActivationEnd } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd, ChildActivationEnd, Params, PRIMARY_OUTLET } from '@angular/router';
 import { filter, tap, map, take } from 'rxjs/internal/operators';
 
+
+interface IBreadcrumb {
+  label: string;
+  params: Params;
+  url: string;
+}
 @Component({
   selector: 'app-breadcrumbs',
   templateUrl: './breadcrumbs.component.html',
   styleUrls: ['./breadcrumbs.component.css']
 })
 export class BreadcrumbsComponent implements OnInit {
-
+  public breadcrumbs: IBreadcrumb[];
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute
-  ) { }
-
-  ngOnInit() {
-    this.router.events.pipe(
-      filter(event => event instanceof ChildActivationEnd),
-      filter((event: ChildActivationEnd) => event.snapshot.routeConfig !== null)
-    ).subscribe(event => {
-      console.log(this.activatedRoute.root);
-      // console.log(event.snapshot.routeConfig);
-      // console.log(event);
-      }
-    );
-    this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      // .subscribe(() => console.log(this.activatedRoute.root));
-    // this.activatedRoute.queryParamMap.subscribe(console.log);
-  //   this.router.events
-  //     .pipe(filter(event => event instanceof NavigationEnd))
-  //     .subscribe((data) => console.log(data));
+  ) {
+    this.breadcrumbs = [];
   }
 
-  // private createBreadcrumbs(route: ActivatedRoute, url: string = '#', breadcrumbs: MenuItem[] = []): MenuItem[] {
-  //   const children: ActivatedRoute[] = route.children;
+  ngOnInit() {
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {
+      const root: ActivatedRoute = this.activatedRoute.root;
+      this.breadcrumbs = this.getBreadcrumbs(root);
+    });
+  }
 
-  //   if (children.length === 0) {
-  //     return breadcrumbs;
-  //   }
+  private getBreadcrumbs(route: ActivatedRoute, url: string= '', breadcrumbs: IBreadcrumb[]=[]): IBreadcrumb[] {
+    const ROUTE_DATA_BREADCRUMB = 'breadcrumb';
+    const children: ActivatedRoute[] = route.children;
 
-  //   for (const child of children) {
-  //     const routeURL: string = child.snapshot.url.map(segment => segment.path).join('/');
-  //     if (routeURL !== '') {
-  //       url += `/${routeURL}`;
-  //     }
+    if (children.length === 0) {
+      return breadcrumbs;
+    }
 
-  //     const label = child.snapshot.data[BreadcrumbComponent.ROUTE_DATA_BREADCRUMB];
-  //     if (!isNullOrUndefined(label)) {
-  //       breadcrumbs.push({label, url});
-  //     }
+    for (const child of children) {
+      if (child.outlet !== PRIMARY_OUTLET) {
+        continue;
+      }
 
-  //     return this.createBreadcrumbs(child, url, breadcrumbs);
-  //   }
-  // }
+      if (!child.snapshot.data.hasOwnProperty(ROUTE_DATA_BREADCRUMB)) {
+        return this.getBreadcrumbs(child, url, breadcrumbs);
+      }
+      console.log(child);
+      const routeURL: string = child.snapshot.url.map(segment => segment.path).join('/');
+      url += `/${routeURL}`;
+
+      const breadcrumb: IBreadcrumb = {
+        label: this.setLabelBreadCrumbs(child.snapshot.params.id, child.snapshot.data[ROUTE_DATA_BREADCRUMB]),
+        params: child.snapshot.params,
+        url
+      };
+      breadcrumbs.push(breadcrumb);
+
+      return this.getBreadcrumbs(child, url, breadcrumbs);
+    }
+  }
+  private setLabelBreadCrumbs(params: string, data: string): string {
+    if (params) {
+      return `${params} Video Course `;
+    }
+    return data;
+  }
 
 }

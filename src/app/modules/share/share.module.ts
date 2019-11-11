@@ -8,6 +8,7 @@ import { SearchComponent } from 'src/app/components/search/search.component';
 import { FilterCoursePipe } from 'src/app/pipes/filterCourse/filter-course.pipe';
 import { ModalBoxComponent } from 'src/app/components/modal-box/modal-box.component';
 import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -24,6 +25,7 @@ import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
   imports: [
     CommonModule,
     FormsModule,
+    RouterModule
   ],
   exports: [
     CommonModule,

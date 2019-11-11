@@ -10,8 +10,6 @@ import { CourseDetailsComponent } from 'src/app/components/pages/course-details/
 import { CustomBorderDirective } from 'src/app/directives/custom-border.directive';
 import { DateFormatPipe } from 'src/app/pipes/dateFormate/date-format.pipe';
 import { OrderByPipe } from 'src/app/pipes/orderBy/order-by.pipe';
-import { SpinnerService } from 'src/app/services/spinner/spinner.service';
-import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
 import { ShareModule } from '../share/share.module';
 import { CoreModule } from '../core/core.module';
 
@@ -30,7 +28,7 @@ import { CoreModule } from '../core/core.module';
     CommonModule,
     CoursesRoutingModule,
     ShareModule,
-    CoreModule
+    CoreModule,
   ],
   providers: [CourseServiceService]
 })
