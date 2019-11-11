@@ -12,6 +12,7 @@ import { DateFormatPipe } from 'src/app/pipes/dateFormate/date-format.pipe';
 import { OrderByPipe } from 'src/app/pipes/orderBy/order-by.pipe';
 import { ShareModule } from '../share/share.module';
 import { CoreModule } from '../core/core.module';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { CoreModule } from '../core/core.module';
     CoursesRoutingModule,
     ShareModule,
     CoreModule,
+    RouterModule
   ],
   providers: [CourseServiceService]
 })

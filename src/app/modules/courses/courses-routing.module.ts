@@ -11,8 +11,8 @@ const routerCourses: Routes = [
     data: { breadcrumb: 'Courses' },
     children: [
       { path: '', component: CoursesComponent, data: { breadcrumb: null } },
-      { path: 'details/:id', component: CourseDetailsComponent, data: { breadcrumb: '' } },
-      { path: 'details/new', component: CourseDetailsComponent, data: { breadcrumb: 'new' } },
+      { path: ':id', component: CourseDetailsComponent, data: { breadcrumb: '' } },
+      { path: 'new', component: CourseDetailsComponent, data: { breadcrumb: 'new' } },
     ]
   }
 ];

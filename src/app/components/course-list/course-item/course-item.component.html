@@ -9,7 +9,7 @@
   <div class="content">
     <div class="description">{{course.description}}</div>
     <div>
-      <button class="btn btn-info">Edit</button>
+      <a routerLink="{{course.id}}"><button class="btn btn-info">Edit</button></a>
       <button class="btn btn-info" (click)="deleteCourse(course)">Delete</button>
     </div>
   </div>

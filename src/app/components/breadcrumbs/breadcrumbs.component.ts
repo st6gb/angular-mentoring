@@ -41,11 +41,9 @@ export class BreadcrumbsComponent implements OnInit {
       if (child.outlet !== PRIMARY_OUTLET) {
         continue;
       }
-
       if (!child.snapshot.data.hasOwnProperty(ROUTE_DATA_BREADCRUMB)) {
         return this.getBreadcrumbs(child, url, breadcrumbs);
       }
-      console.log(child);
       const routeURL: string = child.snapshot.url.map(segment => segment.path).join('/');
       url += `/${routeURL}`;
 

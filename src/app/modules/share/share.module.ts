@@ -29,6 +29,7 @@ import { RouterModule } from '@angular/router';
   ],
   exports: [
     CommonModule,
+    RouterModule,
     FormsModule,
     FooterComponent,
     HeaderComponent,
