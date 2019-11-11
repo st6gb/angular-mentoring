@@ -39,13 +39,13 @@ export class CourseServiceService {
 
   public getCourseList(): Observable<Course[]> {
     return of(this.mockCourseList).pipe(
-      delay(500)
+      delay(100)
     );
   }
 
   public getCourseById(id: string): Observable<Course | {}> {
     return of(this.mockCourseList).pipe(
-      delay(500),
+      delay(100),
       switchMap((courseList: Course[]) => {
         const courseFound = courseList.find(course => course.id === id);
         return courseFound ? of(courseFound) : of({});
@@ -55,7 +55,7 @@ export class CourseServiceService {
 
   public createCourse(course: Course): Observable<Course | {}> {
     return of(this.mockCourseList).pipe(
-      delay(500),
+      delay(100),
       switchMap((courseList: Course[]) => {
         if (courseList.find((item: Course) => item.id === course.id)) {
           return of({});
@@ -68,7 +68,7 @@ export class CourseServiceService {
 
   public updateCourse(course: Course): Observable<Course | {}> {
     return of(this.mockCourseList).pipe(
-      delay(500),
+      delay(100),
       switchMap((courseList: Course[]) => {
         const courseFound = courseList.find((item: Course) => item.id === course.id);
         if (courseFound) {
@@ -82,7 +82,7 @@ export class CourseServiceService {
 
   public removeCourse(id: string): Observable<Course | {}> {
     return of(this.mockCourseList).pipe(
-      delay(500),
+      delay(100),
       switchMap((courseList: Course[]) => {
         const courseFound = courseList.find((item: Course) => item.id === id);
         if (courseFound) {
