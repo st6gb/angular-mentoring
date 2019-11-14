@@ -23,18 +23,17 @@ export class LoginComponent implements OnInit {
 
   public onSubmit() {
     const newUser = {
-      id: '',
       firstName: '',
       LastName: '',
       password: this.password,
       email: this.email,
     };
-    this.isLoading = true
+    this.isLoading = true;
     this.loginService.login(new User(newUser)).subscribe(data => {
-      if(data) {
+      if (data) {
         this.router.navigate(['/']);
       } else {
-        alert('Something went wrong');
+        alert('entered wrong email or password');
       }
       console.log(data, 'you log in our service!');
       this.isLoading = false;

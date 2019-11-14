@@ -7,6 +7,7 @@ import { PageNotFoundComponent } from './components/pages/page-not-found/page-no
 import { CoreModule } from './modules/core/core.module';
 import { ShareModule } from './modules/share/share.module';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { RouterModule } from '@angular/router';
     AppRoutingModule,
     CoreModule.forRoot(),
     ShareModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

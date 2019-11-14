@@ -1,5 +1,5 @@
 interface ICourse {
-  id: string;
+  id?: string;
   title: string;
   creationDate: Date;
   duration: Date;
@@ -7,7 +7,7 @@ interface ICourse {
 }
 
 interface IUser {
-  id: string;
+  id?: string;
   firstName?: string;
   LastName?: string;
   password?: string;
@@ -15,7 +15,7 @@ interface IUser {
 }
 
 export class Course implements ICourse {
-  readonly id: string;
+  id?: string;
   title: string;
   creationDate: Date;
   duration: Date;
@@ -28,7 +28,7 @@ export class Course implements ICourse {
 }
 
 export class User implements IUser {
-  readonly id: string;
+  readonly id?: string;
   firstName?: string;
   LastName?: string;
   password?: string;

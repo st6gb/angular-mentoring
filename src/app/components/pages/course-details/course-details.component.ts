@@ -4,6 +4,7 @@ import { CourseServiceService } from 'src/app/services/courseService/course-serv
 import { switchMap, tap } from 'rxjs/internal/operators';
 import { of } from 'rxjs/internal/observable/of';
 import { Course } from 'src/app/models/common-module';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-course-details',
@@ -14,8 +15,9 @@ export class CourseDetailsComponent implements OnInit {
   public isLoading = false;
   public title: string = '';
   public description: string = '';
-  public date: Date;
-  public duration: Date;
+  public date: string;
+  public duration: string;
+  private id: string;
   private isNew = false;
 
   constructor(
@@ -27,46 +29,48 @@ export class CourseDetailsComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.pipe(
       switchMap(value => {
-        this.isNew = value.id == 'new';
-        if(value.id === 'new'|| value.id === undefined) {
+        this.isNew = value.id === 'new';
+        if (value.id === 'new' || value.id === undefined) {
           return of(null);
         }
+        this.id = value.id;
         return this.courseService.getCourseById(value.id);
       }),
-      tap((value: Course | null) => {
-        if(value){
-          this.title = value.title;
-          this.description = value.description;
-          this.date = value.creationDate;
-          this.duration = value.duration;
+      tap((value: Course[] | null) => {
+        console.log(value);
+        if (value) {
+          this.title = value[0].title;
+          this.description = value[0].description;
+          this.date = format(new Date(value[0].creationDate), 'yyyy-MM-dd');
+          this.duration = format(new Date(value[0].duration), 'yyyy-MM-dd');
           return of(value);
         }
       })
-    ).subscribe(console)
+    ).subscribe(console);
   }
 
   public onSave() {
     this.isLoading = true;
+    console.log(this.duration);
     const newCourse: Course = {
       title: this.title,
-      duration: this.duration,
-      creationDate: this.date,
+      duration: new Date(this.duration),
+      creationDate: new Date(this.date),
       description: this.description,
-      id: `${Math.floor(Math.random()*1000)}`,
       topRated: false,
-    }
-    if(this.isNew){
-      this.courseService.createCourse(newCourse).subscribe(value =>{
+    };
+    if (this.isNew) {
+      this.courseService.createCourse(newCourse).subscribe(value => {
         this.isLoading = false;
         this.router.navigate(['courses']);
       });
-    }else {
-      this.courseService.updateCourse(newCourse).subscribe(value =>{
+    } else {
+      newCourse.id = this.id;
+      this.courseService.updateCourse(newCourse).subscribe(value => {
         this.isLoading = false;
         this.router.navigate(['courses']);
-      });;
+      });
     }
-    
   }
 
   public onCancel() {

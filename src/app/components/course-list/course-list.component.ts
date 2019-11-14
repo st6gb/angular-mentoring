@@ -21,9 +21,9 @@ export class CourseListComponent implements OnInit {
   public courseDeleteHandler(courseDeleted: Course) {
     if (confirm(`Are you sure to delete ${courseDeleted.title}`)) {
       this.courseService.removeCourse(courseDeleted.id).subscribe(data => {
-        if (isCourse(data)) {
+        if (data) {
           alert('Deleted success');
-          this.courseList = this.courseList.filter(course => course.id !== data.id);
+          this.courseList = this.courseList.filter(course => course.id !== courseDeleted.id);
           return;
         }
         alert('Something went wrong');
