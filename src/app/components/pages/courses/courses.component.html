@@ -1,3 +1,7 @@
 <app-search (filteredCourses)="filteredCourses($event)"></app-search>
-<button class="btn btn-info" (click)="addNewCourse()">+ Add courses</button>
+<button class="btn btn-info" (click)="addNewCourse()" id="addCourses">+ Add courses</button>
 <app-course-list [courseList]="courseList"></app-course-list>
+<button *ngIf="isLoadMore" class="btn btn-info" (click)="loadMore()"[disabled]="isLoading">
+  <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+  Load More Courses
+</button>

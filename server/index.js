@@ -9,6 +9,9 @@ server.use((req, res, next) => {
   if (req.headers.token) {
     return next();
   }
+  if (req._parsedUrl.pathname === '/login') {
+    return next();
+  }
   res.sendStatus(401);
 });
 server.use(router);

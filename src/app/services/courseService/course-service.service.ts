@@ -9,70 +9,82 @@ import { HttpClientService } from '../httpClient/http-client.service';
   providedIn: 'root'
 })
 export class CourseServiceService {
-  private mockCourseList: Course[] = [];
-
   constructor(private http: HttpClientService) { }
 
   public getCourseList(): Observable<Course[]> {
     return this.http.getData('http://localhost:3004/courses').pipe(
+      delay(400),
       map((courses: Course[]) => {
         return courses.map(course => {
-          course.creationDate = new Date(course.creationDate);
-          course.duration = new Date(course.duration);
-          return course;
+          return this.mapDateCourse(course);
         });
       })
     );
   }
 
-  public getCourseById(id: string): Observable<Course | {}> {
-    return of(this.mockCourseList).pipe(
-      delay(100),
-      switchMap((courseList: Course[]) => {
-        const courseFound = courseList.find(course => course.id === id);
-        return courseFound ? of(courseFound) : of({});
+  public searchCourses(query: string): Observable<Course[]> {
+    return this.http.getData(`http://localhost:3004/courses?q=${query}`).pipe(
+      delay(400),
+      map((courses: Course[]) => {
+        return courses.map(course => {
+          return this.mapDateCourse(course);
+        });
       })
-    )
+    );
+  }
+
+  public getPageCourseList(page = 1, limit = 1): Observable<Course[] | []> {
+    return this.http.getData(`http://localhost:3004/courses?_page=${page}&_limit=${limit}`).pipe(
+      delay(400),
+      map((courses: Course[]) => {
+        return courses.map(course => {
+          return this.mapDateCourse(course);
+        });
+      })
+    );
+  }
+
+  public getCourseById(id: string): Observable<Course[] | []> {
+    return this.http.getData(`http://localhost:3004/courses?id=${id}`).pipe(
+      delay(400),
+      map((courses: Course[]) => {
+        return courses.map(course => {
+          return this.mapDateCourse(course);
+        });
+      })
+    );
   }
 
   public createCourse(course: Course): Observable<Course | {}> {
-    return of(this.mockCourseList).pipe(
-      delay(100),
-      switchMap((courseList: Course[]) => {
-        if (courseList.find((item: Course) => item.id === course.id)) {
-          return of({});
-        }
-        this.mockCourseList = [...this.mockCourseList, course];
-        return of(course);
+    const prepareCourse = {
+      ...course,
+      duration: course.duration.toISOString(),
+      creationDate: course.creationDate.toISOString(),
+    };
+    return this.http.postData('http://localhost:3004/courses', prepareCourse).pipe(
+      delay(400),
+      map((elem: Course) => {
+        return this.mapDateCourse(elem);
       })
     );
   }
 
   public updateCourse(course: Course): Observable<Course | {}> {
-    return of(this.mockCourseList).pipe(
-      delay(100),
-      switchMap((courseList: Course[]) => {
-        const courseFound = courseList.find((item: Course) => item.id === course.id);
-        if (courseFound) {
-          this.mockCourseList = this.mockCourseList.map((item: Course) => item.id === course.id ? course : item);
-          return of(course);
-        }
-        return of({});
-      })
-    );
+    const prepareCourse = {
+      ...course,
+      duration: course.duration.toISOString(),
+      creationDate: course.creationDate.toISOString(),
+    };
+    return this.http.putDate('http://localhost:3004/courses/' + course.id, prepareCourse).pipe(delay(400));
   }
 
-  public removeCourse(id: string): Observable<Course | {}> {
-    return of(this.mockCourseList).pipe(
-      delay(100),
-      switchMap((courseList: Course[]) => {
-        const courseFound = courseList.find((item: Course) => item.id === id);
-        if (courseFound) {
-          this.mockCourseList = this.mockCourseList.filter(course => course.id !== id);
-          return of(courseFound);
-        }
-        return of({});
-      })
-    );
+  public removeCourse(id: string): Observable<{}> {
+    return this.http.deleteData('http://localhost:3004/courses/' + id).pipe(delay(400));
+  }
+
+  private mapDateCourse(course): Course {
+    course.creationDate = new Date(course.creationDate);
+    course.duration = new Date(course.duration);
+    return course;
   }
 }

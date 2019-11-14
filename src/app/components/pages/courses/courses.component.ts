@@ -12,6 +12,10 @@ import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 })
 export class CoursesComponent implements OnInit {
   public courseList: Course[];
+  public isLoadMore = false;
+  public isLoading = false;
+  private page = 1;
+  private limit = 2;
 
   constructor(
     private filterCourses: FilterCoursePipe,
@@ -23,17 +27,38 @@ export class CoursesComponent implements OnInit {
 
   ngOnInit() {
     this.spinnerService.show();
-    this.courseService.getCourseList().subscribe(data => {
+    this.courseService.getPageCourseList(this.page, this.limit).subscribe(data => {
+      this.page += 1;
       this.courseList = data;
+      this.isLoadMore = data.length <= this.limit;
       this.spinnerService.hide();
     });
   }
 
   public filteredCourses(value = '') {
-    this.courseList = this.filterCourses.transform(this.courseList, value);
+    this.isLoadMore = false;
+    this.spinnerService.show();
+    this.courseService.searchCourses(value).subscribe(data => {
+      this.courseList = data;
+      this.spinnerService.hide();
+    });
   }
 
   public addNewCourse() {
     this.router.navigate(['courses/new']);
+  }
+
+  public loadMore() {
+    this.isLoading = true;
+    this.courseService.getPageCourseList(this.page, this.limit).subscribe(data => {
+      if (data.length) {
+        this.courseList = [...this.courseList, ...data];
+        this.page += 1;
+        this.isLoadMore = data.length === this.limit;
+      } else {
+        this.isLoadMore = false;
+      }
+      this.isLoading = false;
+    });
   }
 }

@@ -1,36 +1,36 @@
 {
   "courses": [
     {
-      "id": "1",
       "title": "Angular",
+      "duration": "2019-11-15T00:00:00.000Z",
+      "creationDate": "2019-11-14T00:00:00.000Z",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "creationDate": "2019-11-13T14:05:15.901Z",
-      "duration": "2019-11-13T14:05:15.901Z",
-      "topRated": true
+      "topRated": false,
+      "id": "1"
     },
     {
-      "id": "2",
       "title": "React",
+      "duration": "2019-11-14T00:00:00.000Z",
+      "creationDate": "2019-11-14T00:00:00.000Z",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "creationDate": "2019-11-13T14:05:15.901Z",
-      "duration": "2019-11-13T14:05:15.901Z",
-      "topRated": false
+      "topRated": false,
+      "id": "2"
     },
     {
-      "id": "3",
       "title": "Vue",
+      "duration": "2019-11-15T00:00:00.000Z",
+      "creationDate": "2019-11-15T00:00:00.000Z",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "creationDate": "2019-11-13T14:05:15.901Z",
-      "duration": "2019-11-13T14:05:15.901Z",
-      "topRated": false
+      "topRated": false,
+      "id": "3"
     },
     {
-      "id": "4",
       "title": "Vue4",
+      "duration": "2019-05-11T00:00:00.000Z",
+      "creationDate": "2019-07-18T00:00:00.000Z",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "creationDate": "2019-11-13T14:05:15.901Z",
-      "duration": "2019-11-13T14:05:15.901Z",
-      "topRated": false
+      "topRated": false,
+      "id": "4"
     },
     {
       "id": "5",
@@ -48,9 +48,16 @@
       "postId": 1
     }
   ],
-  "login": 
-  [
-    {"id": 1, "email": "123", "password": "123"},
-    {"id": 2, "email": "pavel", "password": "123"}
+  "login": [
+    {
+      "id": 1,
+      "email": "123",
+      "password": "123"
+    },
+    {
+      "id": 2,
+      "email": "pavel",
+      "password": "123"
+    }
   ]
 }

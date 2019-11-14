@@ -19,7 +19,11 @@ export class HttpClientService {
     return this.http.post(url, body);
   }
 
-  public deleteData(url: string, body): Observable<any> {
-    return this.http.delete(url, body);
+  public putDate(url: string, body): Observable<any> {
+    return this.http.put(url, body);
+  }
+
+  public deleteData(url: string): Observable<any> {
+    return this.http.delete(url);
   }
 }
