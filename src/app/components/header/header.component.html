@@ -4,7 +4,14 @@
       <img class="img" src="assets/toppng.com-fiverr-logo-transparent-369x369.png">
       <span>Video curse</span>
       </div>
+      
+      
     <div class="button-group">
+      <span *ngIf="user" class="user">
+        <span>User: </span>
+        <span >{{user.firstName}} </span>
+        <span >{{user.lastName}}</span>
+      </span>
       <!-- <button class="btn btn-info">User login</button> -->
       <button *ngIf="loginService.isAuth | async" class="btn btn-info" (click)="logout()">Log off</button>
     </div>

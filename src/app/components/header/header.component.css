@@ -10,7 +10,11 @@ header {
 }
 
 .button-group {
-  width: 200px;
+  width: 300px;
+}
+
+.user{
+  color: white;
 }
 
 .btn {
