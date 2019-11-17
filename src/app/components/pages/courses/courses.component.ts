@@ -21,36 +21,27 @@ export class CoursesComponent implements OnInit {
   constructor(
     private courseService: CourseServiceService,
     private router: Router,
-    private spinnerService: SpinnerService,
-    private activatedRoute: ActivatedRoute,
+    private spinnerService: SpinnerService
     ) {
   }
 
   ngOnInit() {
     this.spinnerService.show();
-    this.activatedRoute.queryParams.pipe(
-      switchMap(data => {
-        if(data.q) {
-          this.isLoadMore = false;
-          return this.courseService.searchCourses(data.q);
-        }
-        this.isLoadMore = true;
-        return this.courseService.getPageCourseList(this.page, this.limit);
-      })
-    ).subscribe(data => {
-      if (this.isLoadMore) {
-        this.page += 1;
-        this.isLoadMore = data.length <= this.limit;
-      }
+    this.courseService.getPageCourseList(this.page, this.limit).subscribe(data => {
+      this.page += 1;
       this.courseList = data;
+      this.isLoadMore = data.length <= this.limit;
       this.spinnerService.hide();
     })
   }
 
   public filteredCourses(value = '') {
-    if(value) {
-      this.router.navigate(['courses'], { queryParams: { q: value } });
-    }
+    this.isLoadMore = false;
+    this.spinnerService.show();
+    this.courseService.searchCourses(value).subscribe(data => {
+      this.courseList = data;
+      this.spinnerService.hide();
+    })
   }
 
   public addNewCourse() {
