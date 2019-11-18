@@ -30,7 +30,7 @@ export class Course implements ICourse {
 export class User implements IUser {
   readonly id?: string;
   firstName?: string;
-  LastName?: string;
+  lastName?: string;
   password?: string;
   email: string;
 

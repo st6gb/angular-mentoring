@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login/login.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { User } from 'src/app/models/common-module';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+  public user: User;
   constructor(
     public loginService: LoginService,
     private router: Router,
@@ -17,6 +18,9 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(console.log);
+    this.loginService.getUserInfo().subscribe(data => {
+      this.user = data;
+    })
   }
 
   public logout() {

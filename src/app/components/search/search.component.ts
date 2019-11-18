@@ -1,4 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { fromEvent } from 'rxjs/internal/observable/fromEvent';
+import { filter, debounceTime, distinctUntilChanged, tap } from 'rxjs/internal/operators';
+import { of } from 'rxjs/internal/observable/of';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-search',
@@ -8,12 +12,22 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class SearchComponent implements OnInit {
   @Output() filteredCourses: EventEmitter<string> = new EventEmitter<string>();
   public searchValue = '';
+  private search$: Subject<string> = new Subject<string>();
   constructor() { }
 
   ngOnInit() {
+    this.search$.pipe(
+      filter(value => value.length >= 3),
+      debounceTime(500),
+      distinctUntilChanged(),
+      tap((text: string) => {
+        this.filteredCourses.emit(text);
+      })
+    ).subscribe();
   }
 
+
   public searchCourses() {
-    this.filteredCourses.emit(this.searchValue);
+    this.search$.next(this.searchValue);
   }
 }

@@ -52,11 +52,15 @@
     {
       "id": 1,
       "email": "123",
+      "firstName": "Alex",
+      "lastName": "Pupkin",
       "password": "123"
     },
     {
       "id": 2,
       "email": "pavel",
+      "firstName": "Alex",
+      "lastName": "Pupkin",
       "password": "123"
     }
   ]
