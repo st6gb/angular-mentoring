@@ -17,6 +17,7 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     this.search$.pipe(
+      filter(value => value.length >= 3),
       debounceTime(500),
       distinctUntilChanged(),
       tap((text: string) => {
