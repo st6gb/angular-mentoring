@@ -9,7 +9,7 @@ import { ShareModule } from './modules/share/share.module';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
-import { reducerCourses } from './reducers';
+import { reducerCourses, reducerToken, reducerUser } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 
@@ -27,7 +27,13 @@ import { environment } from '../environments/environment';
     ShareModule,
     RouterModule,
     HttpClientModule,
-    StoreModule.forRoot({allCourses: reducerCourses}),
+    StoreModule.forRoot(
+      {
+        allCourses: reducerCourses,
+        token: reducerToken,
+        user: reducerUser
+      }
+    ),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],
