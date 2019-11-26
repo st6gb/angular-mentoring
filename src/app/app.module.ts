@@ -9,9 +9,11 @@ import { ShareModule } from './modules/share/share.module';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
-import { reducerCourses, reducerToken, reducerUser } from './reducers';
+import { reducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { CoursesEffects } from './effects/courses.effects';
 
 @NgModule({
   declarations: [
@@ -27,13 +29,8 @@ import { environment } from '../environments/environment';
     ShareModule,
     RouterModule,
     HttpClientModule,
-    StoreModule.forRoot(
-      {
-        allCourses: reducerCourses,
-        token: reducerToken,
-        user: reducerUser
-      }
-    ),
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([CoursesEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],

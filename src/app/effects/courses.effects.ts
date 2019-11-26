@@ -1,0 +1,31 @@
+import { Injectable } from "@angular/core";
+import { Actions, Effect, ofType } from '@ngrx/effects';
+import { CourseServiceService } from '../services/courseService/course-service.service';
+import { loadCoursesSuccess, loadCoursesError, loadCourses, selectPageCourse } from '../actions/courses.actions';
+import { mergeMap, map, catchError, switchMap, tap, take } from 'rxjs/internal/operators';
+import { of, forkJoin } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { State } from '../reducers';
+
+@Injectable()
+export class CoursesEffects {
+
+  @Effect()
+  loadCourse$ = this.actions$.pipe(
+  ofType(loadCourses),
+  mergeMap(() => this.store.select(selectPageCourse).pipe(
+    take(1),
+    switchMap(page => forkJoin([this.CourseService.getPageCourseList(page), of(page)])),
+    map(([courses, page]) => loadCoursesSuccess({courses, page: page + 1})),
+    catchError(()=> of(loadCoursesError({courses: [], error: true })))
+  ))
+  )
+
+  constructor(
+  private actions$: Actions,
+  private CourseService: CourseServiceService,
+  private store: Store<State>,
+  ) {
+
+  }
+}

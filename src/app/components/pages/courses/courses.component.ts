@@ -6,8 +6,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 import { switchMap } from 'rxjs/internal/operators';
 import { Store } from '@ngrx/store';
+import { setCourses, selectCourses, loadCoursesSuccess, loadCourses } from 'src/app/actions/courses.actions';
 import { State } from 'src/app/reducers';
-import { setCourses, selectCourses } from 'src/app/actions/courses.actions';
 @Component({
   selector: 'app-courses',
   templateUrl: './courses.component.html',
@@ -27,12 +27,12 @@ export class CoursesComponent implements OnInit {
     private spinnerService: SpinnerService,
     private store: Store<State>
     ) {
+      this.store.dispatch(loadCourses())
   }
 
   ngOnInit() {
     this.spinnerService.show();
     this.courseService.getPageCourseList(this.page, this.limit).subscribe(data => {
-      this.store.dispatch(setCourses({courses: data}));
       this.page += 1;
       this.courseList = data;
       this.isLoadMore = data.length <= this.limit;
