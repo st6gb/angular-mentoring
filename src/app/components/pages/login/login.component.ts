@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login/login.service';
 import { User } from 'src/app/models/common-module';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { State } from 'src/app/reducers';
+import { selectToken, loginUser } from 'src/app/actions/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -16,9 +19,17 @@ export class LoginComponent implements OnInit {
   constructor(
     private loginService: LoginService,
     private router: Router,
+    private store: Store<State>
     ) { }
 
   ngOnInit() {
+    this.store.select(selectToken).subscribe(token => {
+      if (token) {
+        this.router.navigate(['/']);
+      }
+      console.log(token, 'you log in our service!');
+      this.isLoading = false;
+    });
   }
 
   public onSubmit() {
@@ -29,15 +40,7 @@ export class LoginComponent implements OnInit {
       email: this.email,
     };
     this.isLoading = true;
-    this.loginService.login(new User(newUser)).subscribe(data => {
-      if (data) {
-        this.router.navigate(['/']);
-      } else {
-        alert('entered wrong email or password');
-      }
-      console.log(data, 'you log in our service!');
-      this.isLoading = false;
-    });
+    this.store.dispatch(loginUser({user: new User(newUser) }));
   }
 
 }
