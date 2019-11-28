@@ -3,8 +3,8 @@ import { LoginService } from 'src/app/services/login/login.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/models/common-module';
 import { Store } from '@ngrx/store';
-import { State } from 'src/app/reducers';
-import { selectUser, deleteUser } from 'src/app/actions/auth.actions';
+import { AppState } from 'src/app/reducers';
+import { selectUser, deleteUser, logOut } from 'src/app/actions/auth.actions';
 import { SubscriptionLike } from 'rxjs';
 
 @Component({
@@ -17,9 +17,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private subscriber$: SubscriptionLike;
   constructor(
     public loginService: LoginService,
-    private router: Router,
     private activatedRoute: ActivatedRoute,
-    private store: Store<State>
+    private store: Store<AppState>
     ) { }
 
   ngOnInit() {
@@ -37,7 +36,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   public logout() {
-    this.store.dispatch(deleteUser());
+    this.store.dispatch(logOut());
   }
 
 }

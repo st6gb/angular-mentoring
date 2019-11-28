@@ -23,6 +23,9 @@ import { AuthEffects } from './effects/auth.effects';
   ],
   exports: [],
   imports: [
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([CoursesEffects, AuthEffects]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     BrowserModule,
     FormsModule,
     AppRoutingModule,
@@ -30,9 +33,6 @@ import { AuthEffects } from './effects/auth.effects';
     ShareModule,
     RouterModule,
     HttpClientModule,
-    StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([CoursesEffects, AuthEffects]),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]

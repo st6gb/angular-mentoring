@@ -2,7 +2,7 @@ import { ActionReducerMap } from '@ngrx/store';
 import { StateCourse, reducerCourses } from './courses.reducer';
 import { StateUser, reducerUser } from './user.reducer';
 
-export interface State {
+export interface AppState {
   allCourses: StateCourse;
   user: StateUser;
 }

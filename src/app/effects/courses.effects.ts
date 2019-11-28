@@ -12,11 +12,12 @@ import {
 import { mergeMap, map, catchError, switchMap, tap, take } from 'rxjs/internal/operators';
 import { of, forkJoin } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { State } from '../reducers';
+import { AppState } from '../reducers';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class CoursesEffects {
-
   @Effect()
   loadCourse$ = this.actions$.pipe(
     ofType(loadCourses),
@@ -44,7 +45,7 @@ export class CoursesEffects {
   constructor(
   private actions$: Actions,
   private CourseService: CourseServiceService,
-  private store: Store<State>,
+  private store: Store<AppState>,
   ) {
 
   }

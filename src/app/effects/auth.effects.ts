@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { State } from '../reducers';
+import { AppState } from '../reducers';
 import { Store } from '@ngrx/store';
-import { loginUser, setToken } from '../actions/auth.actions';
+import { loginUser, setToken, checkAuth, logOut, deleteToken, deleteUser } from '../actions/auth.actions';
 import { mergeMap, map } from 'rxjs/internal/operators';
 import { LoginService } from '../services/login/login.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthEffects {
   @Effect()
   loginUser$ = this.actions$.pipe(
@@ -18,9 +20,25 @@ export class AuthEffects {
       );
     }),
   );
+
+  @Effect()
+  checkAuth$ = this.actions$.pipe(
+    ofType(checkAuth),
+    mergeMap(() => this.loginService.setAuthenticated().pipe(
+      map(token => setToken({ token }))
+    ))
+  );
+
+  @Effect()
+  logout$ = this.actions$.pipe(
+    ofType(logOut),
+    mergeMap(() => this.loginService.logout().pipe(
+      map(value => deleteUser())
+    ))
+  );
+
   constructor(
     private actions$: Actions,
-    private store: Store<State>,
     private loginService: LoginService
   ) { }
 }

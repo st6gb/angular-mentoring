@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 import { Store } from '@ngrx/store';
 import { selectCourses, loadCourses, loadCoursesMore } from 'src/app/actions/courses.actions';
-import { State } from 'src/app/reducers';
+import { AppState } from 'src/app/reducers';
 import { SubscriptionLike } from 'rxjs';
 @Component({
   selector: 'app-courses',
@@ -24,7 +24,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
     private courseService: CourseServiceService,
     private router: Router,
     private spinnerService: SpinnerService,
-    private store: Store<State>
+    private store: Store<AppState>
     ) {
     this.store.dispatch(loadCourses());
   }
