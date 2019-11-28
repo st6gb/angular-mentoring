@@ -7,7 +7,8 @@ import {
   loadCourses,
   selectPageCourse,
   loadCoursesMore,
-  selectCourses
+  selectCourses,
+  addCourse
 } from '../actions/courses.actions';
 import { mergeMap, map, catchError, switchMap, tap, take } from 'rxjs/internal/operators';
 import { of, forkJoin } from 'rxjs';
@@ -39,6 +40,13 @@ export class CoursesEffects {
         const canLoadMore = courses.length > 0;
         return loadCoursesSuccess({ courses, page: data.page + 1, canLoaded: canLoadMore });
       })
+    ))
+  );
+
+  @Effect()
+  addNewCourse$ = this.actions$.pipe(
+    ofType(addCourse),
+    mergeMap(({ course }) => this.CourseService.createCourse(course).pipe(
     ))
   );
 
