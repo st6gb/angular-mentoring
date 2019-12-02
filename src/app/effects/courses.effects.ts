@@ -8,12 +8,19 @@ import {
   selectPageCourse,
   loadCoursesMore,
   selectCourses,
-  addCourse
+  addCourse,
+  updateCourse,
+  setCourses,
+  resetCourses,
+  deleteCourse,
+  deletedCourse
 } from '../actions/courses.actions';
 import { mergeMap, map, catchError, switchMap, tap, take } from 'rxjs/internal/operators';
 import { of, forkJoin } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../reducers';
+import { Router } from '@angular/router';
+import { isCourse } from '../models/union-types';
 
 @Injectable({
   providedIn: 'root'
@@ -47,13 +54,37 @@ export class CoursesEffects {
   addNewCourse$ = this.actions$.pipe(
     ofType(addCourse),
     mergeMap(({ course }) => this.CourseService.createCourse(course).pipe(
+      map((course) => {
+        this.router.navigate(['courses']);
+        return resetCourses();
+      })
     ))
   );
+
+  @Effect()
+  updateCourse$ = this.actions$.pipe(
+    ofType(updateCourse),
+    mergeMap(({course}) => this.CourseService.updateCourse(course).pipe(
+      map((course) => {
+        this.router.navigate(['courses']);
+        return resetCourses();
+      })
+    ))
+  )
+
+  @Effect()
+  deleteCourse$ = this.actions$.pipe(
+    ofType(deleteCourse),
+    mergeMap(({course}) => this.CourseService.removeCourse(course.id).pipe(
+      map(() => deletedCourse({course}))
+    ))
+  )
 
   constructor(
   private actions$: Actions,
   private CourseService: CourseServiceService,
   private store: Store<AppState>,
+  private router: Router,
   ) {
 
   }

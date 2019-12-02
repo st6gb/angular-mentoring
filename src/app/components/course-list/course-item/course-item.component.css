@@ -30,7 +30,8 @@
   padding: 15px;
   margin: 10px 0;
   background-color: white;
-  min-width: 1108px;
+  min-width: 1200px;
+  max-width: 1200px;
 }
 
 .course-item--topRated {

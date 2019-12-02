@@ -11,10 +11,12 @@ export const loadCoursesError = createAction('[Courses] Load courses error', pro
 
 
 
-
+export const resetCourses = createAction('[Courses] reset');
 export const setCourses = createAction('[Courses] set all courses', props<{courses: Course[]}>());
 export const deleteCourse = createAction('[Course] delete course', props<{course: Course}>());
+export const deletedCourse = createAction('[Course] deleted course', props<{course: Course}>());
 export const addCourse = createAction('[Course] add course', props<{course: Course}>());
+export const updateCourse = createAction('[Course] update course', props<{course: Course}>());
 
 export const selectCourses = (state: AppState) => state.allCourses;
 export const selectPageCourse = (state: AppState) => state.allCourses.page;
