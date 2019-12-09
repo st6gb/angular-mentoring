@@ -1,38 +1,50 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Course } from 'src/app/models/common-module';
 import { FilterCoursePipe } from 'src/app/pipes/filterCourse/filter-course.pipe';
 import { CourseServiceService } from 'src/app/services/courseService/course-service.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
-import { switchMap } from 'rxjs/internal/operators';
+import { Store } from '@ngrx/store';
+import { selectCourses, loadCourses, loadCoursesMore } from 'src/app/actions/courses.actions';
+import { AppState } from 'src/app/reducers';
+import { SubscriptionLike } from 'rxjs';
 @Component({
   selector: 'app-courses',
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.css'],
   providers: [FilterCoursePipe]
 })
-export class CoursesComponent implements OnInit {
+export class CoursesComponent implements OnInit, OnDestroy {
   public courseList: Course[];
   public isLoadMore = false;
   public isLoading = false;
-  private page = 1;
-  private limit = 2;
+  private subscription: SubscriptionLike;
 
   constructor(
     private courseService: CourseServiceService,
     private router: Router,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
+    private store: Store<AppState>
     ) {
+    this.store.dispatch(loadCourses());
   }
 
   ngOnInit() {
     this.spinnerService.show();
-    this.courseService.getPageCourseList(this.page, this.limit).subscribe(data => {
-      this.page += 1;
-      this.courseList = data;
-      this.isLoadMore = data.length <= this.limit;
+    this.subscription = this.store.select(selectCourses).subscribe(({courses, canLoaded}) => {
+      console.log('lala', courses);
+      this.courseList = courses;
       this.spinnerService.hide();
-    })
+      this.isLoading = false;
+      this.isLoadMore = canLoaded;
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+      this.subscription = null;
+    }
   }
 
   public filteredCourses(value = '') {
@@ -41,7 +53,7 @@ export class CoursesComponent implements OnInit {
     this.courseService.searchCourses(value).subscribe(data => {
       this.courseList = data;
       this.spinnerService.hide();
-    })
+    });
   }
 
   public addNewCourse() {
@@ -50,15 +62,6 @@ export class CoursesComponent implements OnInit {
 
   public loadMore() {
     this.isLoading = true;
-    this.courseService.getPageCourseList(this.page, this.limit).subscribe(data => {
-      if (data.length) {
-        this.courseList = [...this.courseList, ...data];
-        this.page += 1;
-        this.isLoadMore = data.length === this.limit;
-      } else {
-        this.isLoadMore = false;
-      }
-      this.isLoading = false;
-    });
+    this.store.dispatch(loadCoursesMore());
   }
 }

@@ -8,6 +8,13 @@ import { CoreModule } from './modules/core/core.module';
 import { ShareModule } from './modules/share/share.module';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { CoursesEffects } from './effects/courses.effects';
+import { AuthEffects } from './effects/auth.effects';
 
 @NgModule({
   declarations: [
@@ -16,13 +23,16 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   exports: [],
   imports: [
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([CoursesEffects, AuthEffects]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     CoreModule.forRoot(),
     ShareModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

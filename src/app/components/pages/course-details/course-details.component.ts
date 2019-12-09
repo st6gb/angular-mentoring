@@ -5,6 +5,9 @@ import { switchMap, tap } from 'rxjs/internal/operators';
 import { of } from 'rxjs/internal/observable/of';
 import { Course } from 'src/app/models/common-module';
 import { format } from 'date-fns';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/reducers';
+import { addCourse, updateCourse } from 'src/app/actions/courses.actions';
 
 @Component({
   selector: 'app-course-details',
@@ -23,7 +26,8 @@ export class CourseDetailsComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private courseService: CourseServiceService
+    private courseService: CourseServiceService,
+    private store: Store<AppState>
   ) { }
 
   ngOnInit() {
@@ -51,7 +55,6 @@ export class CourseDetailsComponent implements OnInit {
 
   public onSave() {
     this.isLoading = true;
-    console.log(this.duration);
     const newCourse: Course = {
       title: this.title,
       duration: new Date(this.duration),
@@ -60,16 +63,12 @@ export class CourseDetailsComponent implements OnInit {
       topRated: false,
     };
     if (this.isNew) {
-      this.courseService.createCourse(newCourse).subscribe(value => {
-        this.isLoading = false;
-        this.router.navigate(['courses']);
-      });
+      this.store.dispatch(addCourse({course: newCourse}));
+      this.isLoading = false;
     } else {
       newCourse.id = this.id;
-      this.courseService.updateCourse(newCourse).subscribe(value => {
-        this.isLoading = false;
-        this.router.navigate(['courses']);
-      });
+      this.store.dispatch(updateCourse({course: newCourse}));
+      this.isLoading = false;
     }
   }
 

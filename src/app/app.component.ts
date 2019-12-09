@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { LoginService } from './services/login/login.service';
-import { Observable } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from './reducers';
+import { checkAuth, selectToken } from './actions/auth.actions';
+import { SubscriptionLike } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +11,22 @@ import { Observable } from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(public loginService: LoginService) {
+  public isAuth = false;
+  constructor(
+    public store: Store<AppState>,
+    private router: Router
+  ) {
+    this.store.dispatch(checkAuth());
   }
 
   ngOnInit() {
-    this.loginService.setAuthenticated().subscribe((data) => console.log(data, 'this is login'));
+    this.store.select(selectToken).subscribe(token => {
+      this.isAuth = token !== null;
+      if (token) {
+        this.router.navigate(['/']);
+      } else {
+        this.router.navigate(['/login']);
+      }
+    });
   }
 }

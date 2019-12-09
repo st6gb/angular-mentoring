@@ -40,11 +40,14 @@ export class LoginService {
     );
   }
 
-  public setAuthenticated(): Observable<boolean> {
+  public setAuthenticated(): Observable<string | null> {
     const token = this.localStorage.getItem('token');
     const serverToken = this.localStorage.getItem('token');
     return of(token === serverToken && token !== null).pipe(
       tap(value => this.isAuth.next(value)),
+      switchMap((value) => {
+        return value ? of(token) : of(null);
+      }),
       delay(100)
     );
   }
