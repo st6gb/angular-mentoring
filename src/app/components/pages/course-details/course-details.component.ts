@@ -8,6 +8,7 @@ import { format } from 'date-fns';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/reducers';
 import { addCourse, updateCourse } from 'src/app/actions/courses.actions';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-course-details',
@@ -15,6 +16,7 @@ import { addCourse, updateCourse } from 'src/app/actions/courses.actions';
   styleUrls: ['./course-details.component.css']
 })
 export class CourseDetailsComponent implements OnInit {
+  public courseForm: FormGroup;
   public isLoading = false;
   public title: string = '';
   public description: string = '';
@@ -27,8 +29,11 @@ export class CourseDetailsComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private courseService: CourseServiceService,
-    private store: Store<AppState>
-  ) { }
+    private store: Store<AppState>,
+    private fb: FormBuilder
+  ) {
+    this.createForm();
+  }
 
   ngOnInit() {
     this.activatedRoute.params.pipe(
@@ -74,5 +79,12 @@ export class CourseDetailsComponent implements OnInit {
 
   public onCancel() {
     this.router.navigate(['courses']);
+  }
+
+  private createForm() {
+    this.courseForm = this.fb.group({
+      title: ['', [Validators.required, Validators.maxLength(50)]],
+      description: ['', [Validators.required, Validators.maxLength(500)]]
+    })
   }
 }

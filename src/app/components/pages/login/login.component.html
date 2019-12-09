@@ -1,32 +1,39 @@
-<div class="login">
+<form 
+  class="login"
+  [formGroup]="loginForm"
+  >
   <h1>Login</h1>
   <div class="field">
     <label>E-mail</label>
     <input
-      [(ngModel)]="email"
+      formControlName="email"
       type="email"
-      placeholder=" Enter your e-mail"
+      placeholder="Enter your e-mail"
       class="form-control"
       aria-label="email"
       aria-describedby="basic-addon1"
+      [ngClass]="{'error-input': isFieldInvalid('email')}"
     />
+    <div class="error" *ngIf="isFieldInvalid('email')">{{showErrorEmailMessage}}</div>
   </div>
   <div class="field">
     <label>Password</label>
     <input
-      [(ngModel)]="password"
+      formControlName="password"
       type="password"
       placeholder="Enter your password"
       class="form-control"
       aria-label="password"
       aria-describedby="basic-addon1"
+      [ngClass]="{'error-input': isFieldInvalid('password')}"
     />
+    <div class="error" *ngIf="isFieldInvalid('password')">required</div>
   </div>
   <div class="buttons-group">
     <a href="#">Forget your password?</a>
-    <button class="btn btn-success" (click)="onSubmit()" [disabled]="isLoading">
+    <button class="btn btn-success" (click)="onSubmit()" [disabled]="isLoading || isDisabledLoginButton">
         <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
       Login
     </button>
   </div>
-</div>
+</form>
