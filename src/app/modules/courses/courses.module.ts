@@ -13,6 +13,9 @@ import { OrderByPipe } from 'src/app/pipes/orderBy/order-by.pipe';
 import { ShareModule } from '../share/share.module';
 import { CoreModule } from '../core/core.module';
 import { RouterModule } from '@angular/router';
+import { DateControlComponent } from 'src/app/components/date-control/date-control.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DurationControlComponent } from 'src/app/components/duration-control/duration-control.component';
 
 
 @NgModule({
@@ -21,6 +24,8 @@ import { RouterModule } from '@angular/router';
     CourseItemComponent,
     CoursesComponent,
     CourseDetailsComponent,
+    DateControlComponent,
+    DurationControlComponent,
     DateFormatPipe,
     OrderByPipe,
     CustomBorderDirective
@@ -28,6 +33,7 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     CoursesRoutingModule,
+    ReactiveFormsModule,
     ShareModule,
     CoreModule,
     RouterModule

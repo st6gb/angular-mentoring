@@ -18,8 +18,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class CourseDetailsComponent implements OnInit {
   public courseForm: FormGroup;
   public isLoading = false;
-  public title: string = '';
-  public description: string = '';
   public date: string;
   public duration: string;
   private id: string;
@@ -48,23 +46,31 @@ export class CourseDetailsComponent implements OnInit {
       tap((value: Course[] | null) => {
         console.log(value);
         if (value) {
-          this.title = value[0].title;
-          this.description = value[0].description;
+          this.courseForm.patchValue({
+            title: value[0].title,
+            description: value[0].description,
+          });
           this.date = format(new Date(value[0].creationDate), 'yyyy-MM-dd');
           this.duration = format(new Date(value[0].duration), 'yyyy-MM-dd');
           return of(value);
         }
       })
     ).subscribe(console);
+    this.courseForm.valueChanges.subscribe(data => console.log(data));
+    this.courseForm.statusChanges.subscribe(data => console.log(data));
+  }
+
+  public isFieldInvalid(formName: string): boolean {
+    return this.courseForm.get(formName).invalid && !this.courseForm.get(formName).pristine;
   }
 
   public onSave() {
     this.isLoading = true;
     const newCourse: Course = {
-      title: this.title,
+      title: this.courseForm.get('title').value,
+      description: this.courseForm.get('description').value,
       duration: new Date(this.duration),
-      creationDate: new Date(this.date),
-      description: this.description,
+      creationDate: new Date(this.courseForm.get('date').value),
       topRated: false,
     };
     if (this.isNew) {
@@ -84,7 +90,8 @@ export class CourseDetailsComponent implements OnInit {
   private createForm() {
     this.courseForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(50)]],
-      description: ['', [Validators.required, Validators.maxLength(500)]]
-    })
+      description: ['', [Validators.required, Validators.maxLength(500)]],
+      date: ['', []]
+    });
   }
 }
