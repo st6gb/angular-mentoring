@@ -1,1 +1,5 @@
-<p>duration-control works!</p>
+<p>
+  <input type="text" class="form-control" (input)="changeDuration($event.target.value)">
+  <span *ngIf="!message">{{duration | dateFormat}}</span>
+</p>
+<div class="error" *ngIf="message">{{message}}</div>

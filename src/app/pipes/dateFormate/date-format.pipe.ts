@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { format } from 'date-fns';
 
 @Pipe({
   name: 'dateFormat'
@@ -7,7 +6,9 @@ import { format } from 'date-fns';
 export class DateFormatPipe implements PipeTransform {
 
   transform(value: any, ...args: any[]): any {
-    return `${format(value, 'hh')} h ${format(value, 'mm')} min`;
+    let hours = (value - (value % 60)) / 60;
+    let minutes = value % 60;
+    return `${hours} h ${minutes} min`;
   }
 
 }

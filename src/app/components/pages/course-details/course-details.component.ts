@@ -91,7 +91,8 @@ export class CourseDetailsComponent implements OnInit {
     this.courseForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.maxLength(500)]],
-      date: ['', []]
+      date: ['', []],
+      duration: ['', []]
     });
   }
 }

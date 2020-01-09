@@ -1,4 +1,4 @@
-import { Component, OnInit, forwardRef, Input } from '@angular/core';
+import { Component, OnInit, forwardRef } from '@angular/core';
 import { ControlValueAccessor, Validator, NG_VALUE_ACCESSOR, NG_VALIDATORS, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
@@ -20,7 +20,6 @@ import { Observable, of } from 'rxjs';
   ]
 })
 export class DateControlComponent implements OnInit, ControlValueAccessor, Validator {
-  @Input() value: string;
   public errorMessage: string;
   private disabled = false;
   constructor() { }
