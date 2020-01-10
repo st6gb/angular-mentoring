@@ -92,7 +92,8 @@ export class CourseDetailsComponent implements OnInit {
       title: ['', [Validators.required, Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.maxLength(500)]],
       date: ['', []],
-      duration: ['', []]
+      duration: ['', []],
+      authors: ''
     });
   }
 }

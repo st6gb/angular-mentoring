@@ -63,5 +63,15 @@
       "lastName": "Pupkin",
       "password": "123"
     }
+  ],
+  "authors": [
+    {
+      "firstName": "Alex",
+      "lastName": "Pupkin"
+    },
+    {
+      "firstName": "Poll",
+      "lastName": "Shared"
+    }
   ]
 }

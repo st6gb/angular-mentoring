@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Course } from 'src/app/models/common-module';
+import { Course, IAuthor } from 'src/app/models/common-module';
 import { delay, switchMap, map } from 'rxjs/internal/operators';
 import { HttpClientService } from '../httpClient/http-client.service';
 
@@ -30,6 +30,12 @@ export class CourseServiceService {
           return this.mapDateCourse(course);
         });
       })
+    );
+  }
+
+  public searchAuthors(query: string): Observable<IAuthor[]> {
+    return this.http.getData(`http://localhost:3004/authors?q=${query}`).pipe(
+      delay(400)
     );
   }
 

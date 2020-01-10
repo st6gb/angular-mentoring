@@ -16,6 +16,7 @@ import { RouterModule } from '@angular/router';
 import { DateControlComponent } from 'src/app/components/date-control/date-control.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DurationControlComponent } from 'src/app/components/duration-control/duration-control.component';
+import { AuthorsControlComponent } from 'src/app/components/authors-control/authors-control.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { DurationControlComponent } from 'src/app/components/duration-control/du
     CourseDetailsComponent,
     DateControlComponent,
     DurationControlComponent,
+    AuthorsControlComponent,
     DateFormatPipe,
     OrderByPipe,
     CustomBorderDirective

@@ -1,0 +1,19 @@
+.cloudTags {
+  cursor: text;
+  font-size: 16px;
+  padding: 10px 0px 10px 10px;
+  border-radius: 5px;
+  background: white;
+  border: 1px #cccccc solid;
+}
+
+.couldTag {
+  padding: 5px;
+  margin-right: 5px;
+  background: #6195e8;
+  color: white;
+}
+
+.removeTag {
+  cursor: pointer;
+}

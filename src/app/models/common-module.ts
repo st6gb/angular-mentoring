@@ -6,6 +6,11 @@ interface ICourse {
   description: string;
 }
 
+export interface IAuthor {
+  firstName: string;
+  lastName: string;
+}
+
 interface IUser {
   id?: string;
   firstName?: string;

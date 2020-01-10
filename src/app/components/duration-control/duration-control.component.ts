@@ -1,5 +1,5 @@
 import { Component, OnInit, forwardRef } from '@angular/core';
-import { NG_VALUE_ACCESSOR, NG_VALIDATORS, FormControl, ValidationErrors, Validator, ControlValueAccessor } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, NG_VALIDATORS, FormControl, ValidationErrors, Validator, ControlValueAccessor, AbstractControl } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
 @Component({
@@ -45,7 +45,7 @@ export class DurationControlComponent implements OnInit, ControlValueAccessor, V
     this.onTouched = fn;
   }
 
-  validate(control: FormControl): Observable<ValidationErrors> {
+  validate(control: AbstractControl): Observable<ValidationErrors> {
     const value = control.value;
     if (!Number.isInteger(+value) && !control.pristine) {
       this.message = 'should contain only digital';
