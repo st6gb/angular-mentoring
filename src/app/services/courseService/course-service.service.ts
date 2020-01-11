@@ -64,7 +64,6 @@ export class CourseServiceService {
   public createCourse(course: Course): Observable<Course | {}> {
     const prepareCourse = {
       ...course,
-      duration: course.duration.toISOString(),
       creationDate: course.creationDate.toISOString(),
     };
     return this.http.postData('http://localhost:3004/courses', prepareCourse).pipe(
@@ -78,7 +77,6 @@ export class CourseServiceService {
   public updateCourse(course: Course): Observable<Course | {}> {
     const prepareCourse = {
       ...course,
-      duration: course.duration.toISOString(),
       creationDate: course.creationDate.toISOString(),
     };
     return this.http.putDate('http://localhost:3004/courses/' + course.id, prepareCourse).pipe(delay(400));
@@ -90,7 +88,6 @@ export class CourseServiceService {
 
   private mapDateCourse(course): Course {
     course.creationDate = new Date(course.creationDate);
-    course.duration = new Date(course.duration);
     return course;
   }
 }

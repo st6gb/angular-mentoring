@@ -2,23 +2,33 @@
   "courses": [
     {
       "title": "AngularJS",
-      "duration": "2019-11-16T00:00:00.000Z",
-      "creationDate": "2019-11-14T00:00:00.000Z",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "duration": "150",
+      "creationDate": "0119-12-31T20:39:40.000Z",
+      "authors": [
+        {
+          "firstName": "Alex",
+          "lastName": "Pupkin"
+        },
+        {
+          "firstName": "Poll",
+          "lastName": "Shared"
+        }
+      ],
       "topRated": false,
       "id": "1"
     },
     {
       "title": "React",
       "duration": "2019-11-14T00:00:00.000Z",
-      "creationDate": "2019-11-14T00:00:00.000Z",
+      "creationDate": "160",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       "topRated": false,
       "id": "2"
     },
     {
       "title": "Vue",
-      "duration": "2019-11-15T00:00:00.000Z",
+      "duration": "140",
       "creationDate": "2019-11-15T00:00:00.000Z",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       "topRated": false,
@@ -26,7 +36,7 @@
     },
     {
       "title": "Vue4",
-      "duration": "2019-05-12T00:00:00.000Z",
+      "duration": "120",
       "creationDate": "2019-07-18T00:00:00.000Z",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       "topRated": false,
@@ -37,8 +47,30 @@
       "title": "Vue5",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       "creationDate": "2019-11-13T14:05:15.901Z",
-      "duration": "2019-11-13T14:05:15.901Z",
+      "duration": "20",
       "topRated": false
+    },
+    {
+      "title": "12312",
+      "description": "12312",
+      "duration": "100",
+      "creationDate": "1111-11-10T20:39:40.000Z",
+      "topRated": false,
+      "id": "YWnMDyd"
+    },
+    {
+      "title": "Pavel",
+      "description": "lalala",
+      "duration": "123",
+      "creationDate": "1111-11-10T20:39:40.000Z",
+      "authors": [
+        {
+          "firstName": "Alex",
+          "lastName": "Pupkin"
+        }
+      ],
+      "topRated": false,
+      "id": "Grls8nf"
     }
   ],
   "comments": [

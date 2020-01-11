@@ -1,4 +1,4 @@
-import { Component, OnInit, forwardRef } from '@angular/core';
+import { Component, OnInit, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, Validator, NG_VALUE_ACCESSOR, NG_VALIDATORS, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
@@ -20,15 +20,21 @@ import { Observable, of } from 'rxjs';
   ]
 })
 export class DateControlComponent implements OnInit, ControlValueAccessor, Validator {
+  @Input('date') set date(value) {
+    this._date = value;
+    this.writeValue(value);
+  }
+
+  get date() {
+    return this._date;
+  }
   public errorMessage: string;
   private disabled = false;
+  private _date: string;
   constructor() { }
 
   ngOnInit() {
-  }
-
-  public onChangeValue(value: string) {
-    this.writeValue(value);
+    this.writeValue(this.date);
   }
 
   onChange: any = () => { };

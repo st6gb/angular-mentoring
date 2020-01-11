@@ -1,4 +1,4 @@
 <p>
-  <input type="text" class="form-control" (input)="onChangeValue($event.target.value)">
+  <input type="text" class="form-control" [(ngModel)]="date">
 </p>
 <div class="error" *ngIf="errorMessage">{{errorMessage}}</div>

@@ -12,18 +12,18 @@
     <div class="error" *ngIf="isFieldInvalid('description')">required</div>
     <div class="date">
       <label>Date</label>
-      <app-date-control formControlName="date"></app-date-control>
+      <app-date-control formControlName="date" [date]="courseForm.get('date').value"></app-date-control>
     </div>
     <div class="date">
       <label >Duration</label>
-      <app-duration-control formControlName="duration"></app-duration-control>
+      <app-duration-control formControlName="duration" [duration]="courseForm.get('duration').value" ></app-duration-control>
     </div>
     <div>
       <label>Authors</label>
-      <app-authors-control formControlName="authors"></app-authors-control>
+      <app-authors-control formControlName="authors" [authors]="courseForm.get('authors').value"></app-authors-control>
     </div>
     <div class="button-group">
-      <button class="btn btn-info" (click)="onSave()" [disabled]="isLoading">
+      <button class="btn btn-info" (click)="onSave()" [disabled]="isLoading || courseForm.invalid || courseForm.pristine">
         <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
         Save course
       </button>

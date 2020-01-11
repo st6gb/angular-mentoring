@@ -1,4 +1,4 @@
-import { Component, OnInit, forwardRef, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, forwardRef, ViewChild, ElementRef, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR, Validator, ControlValueAccessor, ValidationErrors, AbstractControl, NG_VALIDATORS } from '@angular/forms';
 import { Observable, Subject, of } from 'rxjs';
 import { IAuthor } from 'src/app/models/common-module';
@@ -23,8 +23,12 @@ import { debounceTime, distinctUntilChanged, switchMap, map } from 'rxjs/interna
   ]
 })
 export class AuthorsControlComponent implements OnInit, Validator, ControlValueAccessor {
-  @ViewChild('inputAuthor', {static: false}) inputAuthor: ElementRef;
-  public tags: IAuthor[] = [{ firstName: 'Pavel', lastName: 'Buldakov' }, { firstName: 'Alex', lastName: 'Bulak' }];
+  @ViewChild('inputAuthor', { static: false }) inputAuthor: ElementRef;
+  @Input('authors') set authors(value) {
+    this.tags = [...value];
+    this.writeValue(this.tags);
+  }
+  public tags: IAuthor[] = [];
   public suggestAuthors: IAuthor[] = [];
   private search$: Subject<string> = new Subject<string>();
   constructor(private courseService: CourseServiceService) { }
@@ -68,6 +72,7 @@ export class AuthorsControlComponent implements OnInit, Validator, ControlValueA
 
   public removeTag(element: IAuthor) {
     this.tags = this.tags.filter(tag => element.firstName !== tag.firstName);
+    this.writeValue(this.tags);
   }
 
   public getAuthors(query: string) {
@@ -76,6 +81,7 @@ export class AuthorsControlComponent implements OnInit, Validator, ControlValueA
 
   public selectAuthor(author: IAuthor) {
     this.tags.push(author);
+    this.writeValue(this.tags);
     this.inputAuthor.nativeElement.value = '';
     this.search$.next('');
   }

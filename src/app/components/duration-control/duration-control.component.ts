@@ -1,4 +1,4 @@
-import { Component, OnInit, forwardRef } from '@angular/core';
+import { Component, OnInit, forwardRef, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR, NG_VALIDATORS, FormControl, ValidationErrors, Validator, ControlValueAccessor, AbstractControl } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
@@ -20,8 +20,16 @@ import { Observable, of } from 'rxjs';
   ]
 })
 export class DurationControlComponent implements OnInit, ControlValueAccessor, Validator {
-  public duration: string;
+  @Input('duration') set duration(value) {
+    this._duration = value;
+    this.writeValue(value);
+  }
+
+  get duration() {
+    return this._duration;
+  }
   public message: string;
+  private _duration: string;
   constructor() { }
 
   ngOnInit() {
@@ -31,7 +39,6 @@ export class DurationControlComponent implements OnInit, ControlValueAccessor, V
   }
 
   writeValue(value: string) {
-    this.duration = value;
     this.onChange(value);
   }
   onChange: any = () => { };
@@ -54,5 +61,4 @@ export class DurationControlComponent implements OnInit, ControlValueAccessor, V
     this.message = '';
     return null;
   }
-
 }

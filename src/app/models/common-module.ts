@@ -2,7 +2,7 @@ interface ICourse {
   id?: string;
   title: string;
   creationDate: Date;
-  duration: Date;
+  duration: string;
   description: string;
 }
 
@@ -23,9 +23,10 @@ export class Course implements ICourse {
   id?: string;
   title: string;
   creationDate: Date;
-  duration: Date;
+  duration: string;
   description: string;
   topRated: boolean;
+  authors: IAuthor[];
 
   constructor(data: Partial<Course>) {
     Object.assign(this, data);

@@ -9,6 +9,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/reducers';
 import { addCourse, updateCourse } from 'src/app/actions/courses.actions';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DatePipe } from '@angular/common';
+import { DateFormatPipe } from 'src/app/pipes/dateFormate/date-format.pipe';
 
 @Component({
   selector: 'app-course-details',
@@ -28,7 +30,7 @@ export class CourseDetailsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private courseService: CourseServiceService,
     private store: Store<AppState>,
-    private fb: FormBuilder
+    private fb: FormBuilder,
   ) {
     this.createForm();
   }
@@ -49,9 +51,10 @@ export class CourseDetailsComponent implements OnInit {
           this.courseForm.patchValue({
             title: value[0].title,
             description: value[0].description,
+            date: format(new Date(value[0].creationDate), 'dd.MM.yyyy'),
+            duration: value[0].duration,
+            authors: value[0].authors
           });
-          this.date = format(new Date(value[0].creationDate), 'yyyy-MM-dd');
-          this.duration = format(new Date(value[0].duration), 'yyyy-MM-dd');
           return of(value);
         }
       })
@@ -69,8 +72,9 @@ export class CourseDetailsComponent implements OnInit {
     const newCourse: Course = {
       title: this.courseForm.get('title').value,
       description: this.courseForm.get('description').value,
-      duration: new Date(this.duration),
+      duration: this.courseForm.get('duration').value,
       creationDate: new Date(this.courseForm.get('date').value),
+      authors: this.courseForm.get('authors').value,
       topRated: false,
     };
     if (this.isNew) {
@@ -91,9 +95,9 @@ export class CourseDetailsComponent implements OnInit {
     this.courseForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.maxLength(500)]],
-      date: ['', []],
-      duration: ['', []],
-      authors: ''
+      date: ['', [Validators.required]],
+      duration: ['', [Validators.required]],
+      authors: [[], []]
     });
   }
 }
