@@ -87,6 +87,9 @@ export class AuthorsControlComponent implements OnInit, Validator, ControlValueA
   }
 
   validate(control: AbstractControl): Observable<ValidationErrors> {
+    if (control.value.length === 0) {
+      return of({ message: 'Required' });
+    }
     return null;
   }
 }
