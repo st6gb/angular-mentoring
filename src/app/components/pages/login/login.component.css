@@ -29,3 +29,11 @@
 .buttons-group button{
   height: 38px;
 }
+
+.error {
+  color: red;
+}
+
+.error-input {
+  border-color: red;
+}

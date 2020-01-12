@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Course } from 'src/app/models/common-module';
+import { Course, IAuthor } from 'src/app/models/common-module';
 import { delay, switchMap, map } from 'rxjs/internal/operators';
 import { HttpClientService } from '../httpClient/http-client.service';
 
@@ -33,6 +33,12 @@ export class CourseServiceService {
     );
   }
 
+  public searchAuthors(query: string): Observable<IAuthor[]> {
+    return this.http.getData(`http://localhost:3004/authors?q=${query}`).pipe(
+      delay(400)
+    );
+  }
+
   public getPageCourseList(page = 1, limit = 1): Observable<Course[] | []> {
     return this.http.getData(`http://localhost:3004/courses?_page=${page}&_limit=${limit}`).pipe(
       delay(400),
@@ -58,7 +64,6 @@ export class CourseServiceService {
   public createCourse(course: Course): Observable<Course | {}> {
     const prepareCourse = {
       ...course,
-      duration: course.duration.toISOString(),
       creationDate: course.creationDate.toISOString(),
     };
     return this.http.postData('http://localhost:3004/courses', prepareCourse).pipe(
@@ -72,7 +77,6 @@ export class CourseServiceService {
   public updateCourse(course: Course): Observable<Course | {}> {
     const prepareCourse = {
       ...course,
-      duration: course.duration.toISOString(),
       creationDate: course.creationDate.toISOString(),
     };
     return this.http.putDate('http://localhost:3004/courses/' + course.id, prepareCourse).pipe(delay(400));
@@ -84,7 +88,6 @@ export class CourseServiceService {
 
   private mapDateCourse(course): Course {
     course.creationDate = new Date(course.creationDate);
-    course.duration = new Date(course.duration);
     return course;
   }
 }

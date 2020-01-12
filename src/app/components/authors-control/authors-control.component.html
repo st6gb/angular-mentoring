@@ -1,0 +1,10 @@
+<div class="cloudTags">
+  <span class="couldTag" *ngFor="let tag of tags">
+    {{tag.firstName}}
+    <span class="removeTag" (click)="removeTag(tag)">x</span>
+  </span>
+  <input (input)="handleOnChange($event.target.value)" placeholder="add author" #inputAuthor>
+  <ul>
+    <li *ngFor="let author of suggestAuthors" (click)="selectAuthor(author)">{{author.firstName + author.lastName}}</li>
+  </ul>
+</div>

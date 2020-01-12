@@ -1,29 +1,33 @@
 <div class="details-course">
+  <form [formGroup]="courseForm">
   <div>
-    <label>Title</label>
-    <input class="form-control" [(ngModel)]="title">
-  </div>
-  <div>
-    <label>Description</label>
-    <textarea class="form-control" [(ngModel)]="description"></textarea>
-  </div>
-  <div class="date">
-    <label>Date</label>
-    <input class="form-control" type="date" [(ngModel)]="date">
-  </div>
-  <div class="date">
-    <label >Duration</label>
-    <input class="form-control" type="date" [(ngModel)]="duration">
-  </div>
-  <div>
-    <label>Authors</label>
-    <input class="form-control">
-  </div>
-  <div class="button-group">
-    <button class="btn btn-info" (click)="onSave()" [disabled]="isLoading">
-      <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-      Save course
-    </button>
-    <button class="btn btn-light" (click)="onCancel()">Cancel and back</button>
-  </div>
+      <label>Title</label>
+      <input formControlName="title" class="form-control">
+    </div>
+    <div class="error" *ngIf="isFieldInvalid('title')">required</div>
+    <div>
+      <label>Description</label>
+      <textarea class="form-control" formControlName="description"></textarea>
+    </div>
+    <div class="error" *ngIf="isFieldInvalid('description')">required</div>
+    <div class="date">
+      <label>Date</label>
+      <app-date-control formControlName="date" [date]="courseForm.get('date').value"></app-date-control>
+    </div>
+    <div class="date">
+      <label >Duration</label>
+      <app-duration-control formControlName="duration" [duration]="courseForm.get('duration').value" ></app-duration-control>
+    </div>
+    <div>
+      <label>Authors</label>
+      <app-authors-control formControlName="authors" [authors]="courseForm.get('authors').value"></app-authors-control>
+    </div>
+    <div class="button-group">
+      <button class="btn btn-info" (click)="onSave()" [disabled]="isLoading || courseForm.invalid || courseForm.pristine">
+        <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Save course
+      </button>
+      <button class="btn btn-light" (click)="onCancel()">Cancel and back</button>
+    </div>
+  </form>
 </div>

@@ -8,6 +8,9 @@ import { format } from 'date-fns';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/reducers';
 import { addCourse, updateCourse } from 'src/app/actions/courses.actions';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DatePipe } from '@angular/common';
+import { DateFormatPipe } from 'src/app/pipes/dateFormate/date-format.pipe';
 
 @Component({
   selector: 'app-course-details',
@@ -15,9 +18,8 @@ import { addCourse, updateCourse } from 'src/app/actions/courses.actions';
   styleUrls: ['./course-details.component.css']
 })
 export class CourseDetailsComponent implements OnInit {
+  public courseForm: FormGroup;
   public isLoading = false;
-  public title: string = '';
-  public description: string = '';
   public date: string;
   public duration: string;
   private id: string;
@@ -27,8 +29,11 @@ export class CourseDetailsComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private courseService: CourseServiceService,
-    private store: Store<AppState>
-  ) { }
+    private store: Store<AppState>,
+    private fb: FormBuilder,
+  ) {
+    this.createForm();
+  }
 
   ngOnInit() {
     this.activatedRoute.params.pipe(
@@ -43,23 +48,33 @@ export class CourseDetailsComponent implements OnInit {
       tap((value: Course[] | null) => {
         console.log(value);
         if (value) {
-          this.title = value[0].title;
-          this.description = value[0].description;
-          this.date = format(new Date(value[0].creationDate), 'yyyy-MM-dd');
-          this.duration = format(new Date(value[0].duration), 'yyyy-MM-dd');
+          this.courseForm.patchValue({
+            title: value[0].title,
+            description: value[0].description,
+            date: format(new Date(value[0].creationDate), 'dd.MM.yyyy'),
+            duration: value[0].duration,
+            authors: value[0].authors
+          });
           return of(value);
         }
       })
     ).subscribe(console);
+    this.courseForm.valueChanges.subscribe(data => console.log(data));
+    this.courseForm.statusChanges.subscribe(data => console.log(data));
+  }
+
+  public isFieldInvalid(formName: string): boolean {
+    return this.courseForm.get(formName).invalid && !this.courseForm.get(formName).pristine;
   }
 
   public onSave() {
     this.isLoading = true;
     const newCourse: Course = {
-      title: this.title,
-      duration: new Date(this.duration),
-      creationDate: new Date(this.date),
-      description: this.description,
+      title: this.courseForm.get('title').value,
+      description: this.courseForm.get('description').value,
+      duration: this.courseForm.get('duration').value,
+      creationDate: new Date(this.courseForm.get('date').value),
+      authors: this.courseForm.get('authors').value,
       topRated: false,
     };
     if (this.isNew) {
@@ -74,5 +89,15 @@ export class CourseDetailsComponent implements OnInit {
 
   public onCancel() {
     this.router.navigate(['courses']);
+  }
+
+  private createForm() {
+    this.courseForm = this.fb.group({
+      title: ['', [Validators.required, Validators.maxLength(50)]],
+      description: ['', [Validators.required, Validators.maxLength(500)]],
+      date: ['', [Validators.required]],
+      duration: ['', [Validators.required]],
+      authors: [[], []]
+    });
   }
 }

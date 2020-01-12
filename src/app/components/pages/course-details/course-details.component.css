@@ -29,3 +29,7 @@
 .date {
   width: 15%;
 }
+
+.error {
+  color: red;
+}

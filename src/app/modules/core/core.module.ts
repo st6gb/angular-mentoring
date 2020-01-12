@@ -7,13 +7,15 @@ import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from 'src/app/services/AuthInterceptor/auth-interceptor.service';
 import { HttpClientService } from 'src/app/services/httpClient/http-client.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ]
 })
 export class CoreModule {
