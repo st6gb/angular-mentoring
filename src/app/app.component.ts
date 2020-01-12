@@ -4,6 +4,7 @@ import { AppState } from './reducers';
 import { checkAuth, selectToken } from './actions/auth.actions';
 import { SubscriptionLike } from 'rxjs';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   public isAuth = false;
   constructor(
+    public translate: TranslateService,
     public store: Store<AppState>,
     private router: Router
   ) {

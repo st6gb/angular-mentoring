@@ -3,9 +3,17 @@
     <a routerLink="/">
       <div class="logo">
         <img class="img" src="assets/toppng.com-fiverr-logo-transparent-369x369.png">
-        <span>Video curse</span>
+        <span>{{'HOME.TITLE' | translate}}</span>
       </div>
     </a>
+    <div>
+      <label>
+        {{ 'HOME.SELECT' | translate }}
+        <select #langSelect (change)="translate.use(langSelect.value)">
+          <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+        </select>
+      </label>
+    </div>
     <div class="button-group">
       <span *ngIf="user" class="user">
         <span>User: </span>

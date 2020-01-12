@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/reducers';
 import { selectUser, deleteUser, logOut } from 'src/app/actions/auth.actions';
 import { SubscriptionLike } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -17,9 +18,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private subscriber$: SubscriptionLike;
   constructor(
     public loginService: LoginService,
+    public translate: TranslateService,
     private activatedRoute: ActivatedRoute,
-    private store: Store<AppState>
-    ) { }
+    private store: Store<AppState>,
+  ) {
+    translate.addLangs(['en', 'ru']);
+    translate.setDefaultLang('en');
+
+    const browserLang = translate.getBrowserLang();
+    translate.use(browserLang.match(/en|ru/) ? browserLang : 'en');
+    }
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(console.log);

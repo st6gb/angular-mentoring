@@ -9,6 +9,7 @@ import { FilterCoursePipe } from 'src/app/pipes/filterCourse/filter-course.pipe'
 import { ModalBoxComponent } from 'src/app/components/modal-box/modal-box.component';
 import { SpinnerComponent } from 'src/app/components/spinner/spinner.component';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -26,7 +27,8 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    TranslateModule
   ],
   exports: [
     CommonModule,
@@ -39,6 +41,7 @@ import { RouterModule } from '@angular/router';
     FilterCoursePipe,
     ModalBoxComponent,
     SpinnerComponent,
+    TranslateModule
   ]
 })
 export class ShareModule { }
